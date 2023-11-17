@@ -6,7 +6,7 @@ import {
 } from "expo-auth-session";
 
 import * as WebBrowser from "expo-web-browser";
-
+import getEnv from "./env";
 
 const {
     REDIRECT_URI,
