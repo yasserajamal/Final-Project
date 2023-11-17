@@ -16,11 +16,17 @@ const SignInScreen = () => {
   const {username, setUsername} = useState('');
   const {password, setPassword} = useState('');
   const ifSignInPressed = () => {
-    console.warn("SIGN IN")
+    console.warn("SIGN IN") // TODO IMPLEMENT
   };
   const ifforgotPressed = () => {
-    console.warn("You forgot")
+    console.warn("You forgot") // TODO IMPLEMENT
   };
+  const ifSignInCanvas = () => {
+    console.warn("SIGN IN Canvas") // TODO IMPLEMENT
+  }
+  const ifSignInApple = () => {
+    console.warn("SIGN IN Apple") // TODO IMPLEMENT
+  }
 
   return (
     <View style = {styles.container}>
@@ -29,8 +35,8 @@ const SignInScreen = () => {
      <CustomInput placeholder= "Password" input = {password} setInput = {setPassword} secureTextEntry={true}/>
       <CustomButton text= "Sign In" onPress = {ifSignInPressed}/>
       <CustomButton text= "Forgot Password?" onPress = {ifforgotPressed} type="secondary" />
-      <CustomButton text= "Sign In With Canvas" onPress = {ifSignInPressed}/>
-      <CustomButton text= "Sign In With Apple" onPress = {ifSignInPressed}/>
+      <CustomButton text= "Sign In With Canvas" onPress = {ifSignInCanvas}/>
+      <CustomButton text= "Sign In With Apple" onPress = {ifSignInApple}/>
       <Text> Don't have an account yet?  </Text>
       <CustomButton text= "Sign Up" onPress = {ifSignInPressed}/>
     </View>
@@ -39,8 +45,8 @@ const SignInScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    justifyContent: 'center',
+   alignItems: 'center',
+   justifyContent: 'center',
    padding: 30,
    paddingVertical: 30,
    flexDirection: 'column',
