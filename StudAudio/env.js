@@ -1,7 +1,7 @@
 import { Platform } from "react-native";
 // ***** TODO: Fill in your constants here ***** //
 const CLIENT_ID = "TODO";
-const REDIRECT_URI = "TODO"; 
+const REDIRECT_URI = "exp://10.34.98.49:8081"; 
 // any other constants?
 // ********************************************* //
 
@@ -28,18 +28,12 @@ const redirectUri = (uri) => {
       "user-read-private",
     ],
     REDIRECT_URI: redirectUri(REDIRECT_URI),
-    ALBUM_ID: ALBUM_ID,
-    SPOTIFY_API: {
+    CANVAS_API: {
       // Endpoints for auth & token flow
       DISCOVERY: {
-        authorizationEndpoint: "TODO",
-        tokenEndpoint: "TODO",
+        authorizationEndpoint: "https://canvas.stanford.edu/login/oauth2/auth",
+        tokenEndpoint: "https://canvas.stanford.edu/login/oauth2/token",
       },
-      // "https://api.spotify.com/v1//me/top/tracks?time_range=short_term"
-      // ***** TODO: Fill this in ***** //
-      TOP_TRACKS_API: "https://api.spotify.com/v1TODO", 
-      // ***** TODO: Or fill this in ***** //
-      ALBUM_TRACK_API_GETTER: (albumId) => "https://api.spotify.com/v1//albums/4aawyAB9vmqN3uQ7FjRGTy/tracks",
     },
   };
   
