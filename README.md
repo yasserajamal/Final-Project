@@ -12,8 +12,8 @@ Tasks
     b. canvas page
     c. sign up page
     d. Apple page (stretch goal)
-2. Classes Screen: List of all classes
-3. Home Screen: this includes the profile pic,  bottom buttons (help, quick record, classes)and the list of their classes
+2. Home Screen: List of all classes, top and bottom navigation bar
+3. Class Screen: this includes the profile pic,  bottom buttons (help, quick record, classes)and options of Assignments, Notes, Recordings, and Readings
 4. Simple Task: Submitting Assignments
     1. 
 
