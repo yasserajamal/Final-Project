@@ -12,14 +12,15 @@ Tasks
     b. canvas page
     c. sign up page
     d. Apple page (stretch goal)
-2. Home Screen: this includes the profile pic,  bottom buttons (help, quick record, classes)and the list of their classes
-3. Simple Task: Submitting Assignments
+2. Classes Screen: List of all classes
+3. Home Screen: this includes the profile pic,  bottom buttons (help, quick record, classes)and the list of their classes
+4. Simple Task: Submitting Assignments
     1. 
 
-4. Moderate Task: Convert Reading
+5. Moderate Task: Convert Reading
     a. List of Notes screen + Button to create a new note
     b. rename feature for notes
-5. Complex Task: Create and share a note
+6. Complex Task: Create and share a note
    1. Share screen (similar to sign in includes messages, gmail slack etc)
 
 
