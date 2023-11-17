@@ -6,30 +6,35 @@ import {
   Image,
   Pressable,
   FlatList,
+  SafeAreaView,
 
 } from 'react-native';
 
 import {
   useCanvasAuth,
   useCanvasClasses,
+  SignInScreen,
+  
 } from "./utils";
+import {
+  CustomInput
+} from "./components"
+
+
 
 export default function App() {
-  const { token, getSpotifyAuth } = useCanvasAuth();
-  const classes = useCanvasClasses(token);
+  //const { token, getSpotifyAuth } = useCanvasAuth();
+  //const classes = useCanvasClasses(); /*token*/
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <SignInScreen/>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#F9FBFC',
   },
 });
