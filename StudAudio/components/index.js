@@ -1,3 +1,3 @@
 import CustomInput from "./customInput";
-
-export { CustomInput};
+import CustomButton from "./customButton";
+export { CustomInput, CustomButton};

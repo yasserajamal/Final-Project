@@ -22,7 +22,7 @@ container: {
     width: '90%',
     borderColor: '#e8e8e8bh',
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 15,
     paddingHorizontal:20,
     paddingVertical: 15,
     marginVertical: 15, //space username and password
