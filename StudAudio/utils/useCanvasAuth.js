@@ -19,7 +19,6 @@ const {
   // needed so that the browser closes the modal after auth token
   WebBrowser.maybeCompleteAuthSession();
   
-
   const useCanvasAuth = () => {
     const [token, setToken] = useState(null);
     const [request, response, promptAsync] = useAuthRequest(

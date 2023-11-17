@@ -9,7 +9,14 @@ import {
 
 } from 'react-native';
 
+import {
+  useCanvasAuth,
+  useCanvasClasses,
+} from "./utils";
+
 export default function App() {
+  const { token, getSpotifyAuth } = useCanvasAuth();
+  const classes = useCanvasClasses(token);
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
