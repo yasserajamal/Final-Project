@@ -16,6 +16,11 @@ import {
   SignInScreen,
   
 } from "./utils";
+import {
+  CustomInput
+} from "./components"
+
+
 
 export default function App() {
   //const { token, getSpotifyAuth } = useCanvasAuth();
@@ -30,5 +35,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#F9FBFC',
   },
 });
