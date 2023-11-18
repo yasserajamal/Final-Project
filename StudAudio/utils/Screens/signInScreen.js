@@ -3,7 +3,7 @@ import React, {
 
 } 
 from "react";
-import { View, Text, Image , StyleSheet, useWindowDimensions} from "react-native";
+import { View, Text, Image , StyleSheet, useWindowDimensions, Pressable} from "react-native";
 import { Themes, Images } from "../../assets/Themes";
 import {
   CustomInput,
@@ -24,29 +24,33 @@ const SignInScreen = () => {
   const ifSignInCanvas = () => {
     console.warn("SIGN IN Canvas") // TODO IMPLEMENT
   }
+  const ifSignUpPressed = () => {
+    console.warn("SIGN IN Canvas") // TODO IMPLEMENT
+  }
 
   return (
     <View style = {styles.container}>
      <Text style={styles.welcomeText}>Welcome{'\n'}learner!</Text>
      <CustomInput placeholder= "Username or Email" input = {username} setInput = {setUsername} secureTextEntry={false}/>
      <CustomInput placeholder= "Password" input = {password} setInput = {setPassword} secureTextEntry={true}/>
+     <Pressable onPress={ifforgotPressed} style={styles.pressableText}>
+      <Text style={styles.forgotText}> Forgot password?</Text>
+     </Pressable>
       <CustomButton text= "Sign In" onPress = {ifSignInPressed}/>
-      <CustomButton text= "Forgot Password?" onPress = {ifforgotPressed} type="secondary" />
-      <CustomButton text= "Sign In With Canvas" onPress = {ifSignInCanvas}/>
-      <Text> Don't have an account yet?  </Text>
-      <CustomButton text= "Sign Up" onPress = {ifSignInPressed}/>
+      <Text style={styles.text}> {'\n'}Don't have an account yet?  </Text>
+      <CustomButton text= "Sign up" onPress = {ifSignUpPressed} type = "secondary" fgcolor={"black"} bgcolor={'white'}/>
     </View>
   )
 }
-
+// canvas button :  <CustomButton text= "Sign In With Canvas" onPress = {ifSignInCanvas} type= "canvas" fgcolor="white" bgcolor = "#f70d1a"/>
 const styles = StyleSheet.create({
   container: {
    alignItems: 'center',
    justifyContent: 'center',
    padding: 30,
-   paddingVertical: 30,
+   paddingVertical: 100,
    flexDirection: 'column',
-    marginVertical: 40,
+    marginVertical: 50,
   },
   welcomeText: {
     fontSize: 70,
@@ -54,6 +58,17 @@ const styles = StyleSheet.create({
     fontFamily: 'Georgia',
     marginBottom: 20,
   },
+  text: {
+    fontSize: 15,
+    fontWeight: 'light',
+    fontFamily: 'Georgia',
+  },
+  forgotText: {
+    paddingHorizontal:2,
+  },
+  pressableText: {
+    alignSelf: "flex-end",
+  }
  
 });
 

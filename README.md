@@ -7,7 +7,7 @@ Description: Allowing Users to School On-The-Go with Audio.
 
 
 Tasks 
-1. Complete Sign in: YJ
+1. Complete Sign in: In Progress YJ
     a. this includes username/password, forgot password, 
     b. canvas page
     c. sign up page
