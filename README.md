@@ -22,6 +22,8 @@ Tasks
     b. rename feature for notes
 6. Complex Task: Create and share a note
    1. Share screen (similar to sign in includes messages, gmail slack etc)
+   2. sharing messages, can make a screen of what it looks like. 
+   3. add a STOP screen. 
 
 
 
