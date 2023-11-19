@@ -11,24 +11,38 @@ import {
 } from 'react-native';
 
 import {
-  useCanvasAuth,
-  useCanvasClasses,
   SignInScreen,
+  SignUpScreen,
+  ForgotPassword,
+  ResetPassword
   
 } from "./utils";
 import {
   CustomInput
 } from "./components"
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Sign In" component={SignInScreen} />
+      <Stack.Screen name="Sign Up" component={SignUpScreen} />
+      <Stack.Screen name="Forgot Password" component={ForgotPassword} />
+      <Stack.Screen name="Reset Password" component={ResetPassword} />
+    </Stack.Navigator>
+  );
+}
 
 
 
 export default function App() {
-  //const { token, getSpotifyAuth } = useCanvasAuth();
-  //const classes = useCanvasClasses(); /*token*/
   return (
-    <SafeAreaView style={styles.container}>
-      <SignInScreen/>
-    </SafeAreaView>
+    <NavigationContainer>
+    <MyStack />
+  </NavigationContainer>
   );
 }
 
