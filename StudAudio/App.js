@@ -9,26 +9,52 @@ import {
   SafeAreaView,
 
 } from 'react-native';
-
+import {useState} from 'react';
 import {
-  useCanvasAuth,
-  useCanvasClasses,
   SignInScreen,
+  SignUpScreen,
+  ForgotPassword,
+  ResetPassword,
+  HomeScreen,
   
 } from "./utils";
 import {
   CustomInput
 } from "./components"
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+const AppStack= createStackNavigator();
+
+
+function AuthStack({setIsAuthenticated}) {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Sign In" component={SignInScreen} initialParams={{ setIsAuthenticated: setIsAuthenticated }} />
+      <Stack.Screen name="Sign Up" component={SignUpScreen} />
+      <Stack.Screen name="Forgot Password" component={ForgotPassword} />
+      <Stack.Screen name="Reset Password" component={ResetPassword} />
+    </Stack.Navigator>
+   
+  );
+}
+function AppStacks() {
+  return (
+  <AppStack.Navigator>
+    <AppStack.Screen name="STUDAUDIO" component={HomeScreen} />
+ </AppStack.Navigator>
+  );
+}
 
 
 
 export default function App() {
-  //const { token, getSpotifyAuth } = useCanvasAuth();
-  //const classes = useCanvasClasses(); /*token*/
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   return (
-    <SafeAreaView style={styles.container}>
-      <SignInScreen/>
-    </SafeAreaView>
+    <NavigationContainer>
+     {isAuthenticated ? <AppStacks /> : <AuthStack  setIsAuthenticated={setIsAuthenticated} />}
+  </NavigationContainer>
   );
 }
 
