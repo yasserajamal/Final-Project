@@ -8,29 +8,23 @@ import {
   Pressable,
 } from "react-native";
 
-import { CustomInput, CustomButton } from "../../components";
-import { useNavigation } from '@react-navigation/native';
-
-
+import { CustomInput, CustomButton } from "../../../components";
+import { useNavigation } from "@react-navigation/native";
 
 //  <Image source={Images.spotify} style={styles.topIcon} />
-const SignInScreen = () => {
+const SignInScreen = ({ route }) => {
   const { username, setUsername } = useState("");
   const { password, setPassword } = useState("");
+  const setIsAuthenticated= route.params?.setIsAuthenticated;
   const navigation = useNavigation();
   const ifSignInPressed = () => {
-    console.warn("SIGN IN HOMEPAGE"); // TODO IMPLEMENT HOMEPAGE
+    setIsAuthenticated(true); // set to false if authentication fails
   };
   const ifforgotPressed = () => {
-    navigation.navigate('Forgot Password')
-  };
-  const ifSignInCanvas = () => {
-    console.warn("SIGN IN Canvas"); // TODO IMPLEMENT
+    navigation.navigate("Forgot Password");
   };
   const ifSignUpPressed = () => {
-    return (
-      navigation.navigate('Sign Up')
-    );
+    return navigation.navigate("Sign Up");
   };
 
   return (
