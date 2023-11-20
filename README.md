@@ -3,7 +3,8 @@ StudAudio
 
 
 Description: Allowing Users to School On-The-Go with Audio. 
-
+Style Guide:
+For headings, we used Georgia and for actual screen contents we used: Arial.
 
 
 Tasks 

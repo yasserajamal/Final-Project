@@ -2,16 +2,21 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  Image,
   StyleSheet,
-  useWindowDimensions,
-  Pressable,
+
 } from "react-native";
 
 import { CustomInput, CustomButton } from "../../components";
 import { useNavigation } from '@react-navigation/native';
-
-const HomeScreen = () => {
+//import type {Node} from 'react';
+import {
+    Colors,
+    DebugInstructions,
+    Header,
+    LearnMoreLinks,
+    ReloadInstructions
+} from 'react-native/Libraries/NewAppScreen';
+const Classes = () => {
     const { username, setUsername } = useState("");
     const { password, setPassword } = useState("");
     const navigation = useNavigation();
@@ -24,11 +29,7 @@ const HomeScreen = () => {
     const ifSignInCanvas = () => {
       console.warn("SIGN IN Canvas"); // TODO IMPLEMENT
     };
-    const ifSignUpPressed = () => {
-      return (
-        navigation.navigate('Sign Up')
-      );
-    };
+    
   
     return (
       <View style={styles.container}>
@@ -39,8 +40,6 @@ const HomeScreen = () => {
           setInput={setUsername}
           secureTextEntry={false}
         />
-       
-     
       </View>
     );
   };
@@ -55,7 +54,7 @@ const HomeScreen = () => {
       marginVertical: 50,
     },
     welcomeText: {
-      fontSize: 70,
+      fontSize: 60,
       fontWeight: "bold",
       fontFamily: "Georgia",
       marginBottom: 20,
@@ -74,4 +73,4 @@ const HomeScreen = () => {
   });
 
 
-export default HomeScreen;
+export default Classes;

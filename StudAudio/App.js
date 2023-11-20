@@ -23,6 +23,7 @@ import {
 } from "./components"
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import BottomTabs from './components/bottomTabs';
 
 const Stack = createStackNavigator();
 const AppStack= createStackNavigator();
@@ -31,10 +32,10 @@ const AppStack= createStackNavigator();
 function AuthStack({setIsAuthenticated}) {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Sign In" component={SignInScreen} initialParams={{ setIsAuthenticated: setIsAuthenticated }} />
-      <Stack.Screen name="Sign Up" component={SignUpScreen} />
-      <Stack.Screen name="Forgot Password" component={ForgotPassword} />
-      <Stack.Screen name="Reset Password" component={ResetPassword} />
+      <Stack.Screen name="Sign In" component={SignInScreen} initialParams={{ setIsAuthenticated: setIsAuthenticated }}/>
+      <Stack.Screen name="Sign Up" component={SignUpScreen}/>
+      <Stack.Screen name="Forgot Password" component={ForgotPassword}/>
+      <Stack.Screen name="Reset Password" component={ResetPassword}/>
     </Stack.Navigator>
    
   );
@@ -42,8 +43,9 @@ function AuthStack({setIsAuthenticated}) {
 function AppStacks() {
   return (
   <AppStack.Navigator>
-    <AppStack.Screen name="STUDAUDIO" component={HomeScreen} />
+    <AppStack.Screen name="STUDAUDIO" component={BottomTabs} options={{ headerTitle: '' }}/> 
  </AppStack.Navigator>
+
   );
 }
 
