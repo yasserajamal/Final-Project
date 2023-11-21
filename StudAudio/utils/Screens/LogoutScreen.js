@@ -9,7 +9,6 @@ const LogoutScreen = () => {
   const isLogOut = () => {
     if(setIsAuthenticated){
       setIsAuthenticated(false);
-      navigation.navigate('Sign In');
     }
     else {
       console.error("Authentication function not available");
