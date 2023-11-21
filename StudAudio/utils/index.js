@@ -5,7 +5,8 @@ import ResetPassword from "./Screens/signInScreens/resetPassword";
 import Classes from "./Screens/Classes";
 import Help from "./Screens/helpScreen";
 import RecordingsScreen from './Screens/RecordingsScreen'
-
+import UnderConstructionScreen from "./Screens/UnderConstruction";
+import LogoutScreen from "./Screens/LogoutScreen";
 export {
   SignInScreen,
   SignUpScreen,
@@ -14,4 +15,6 @@ export {
   Classes,
   Help,
   RecordingsScreen,
+  UnderConstructionScreen,
+  LogoutScreen,
 };

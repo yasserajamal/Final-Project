@@ -30,12 +30,11 @@ const Classes = () => {
       console.warn("SIGN IN Canvas"); // TODO IMPLEMENT
     };
     
-  
     return (
       <View style={styles.container}>
-        <Text style={styles.welcomeText}>CLASSES{"\n"}</Text>
+        <Text style={styles.welcomeText}>CLASSES</Text>
         <CustomInput
-          placeholder="Username or Email"
+          placeholder="Username"
           input={username}
           setInput={setUsername}
           secureTextEntry={false}
@@ -46,18 +45,18 @@ const Classes = () => {
   // canvas button :  <CustomButton text= "Sign In With Canvas" onPress = {ifSignInCanvas} type= "canvas" fgcolor="white" bgcolor = "#f70d1a"/>
   const styles = StyleSheet.create({
     container: {
-      alignItems: "center",
-      justifyContent: "center",
+      alignItems: "flex-start",
+      justifyContent: "flex-start",
       padding: 30,
       paddingVertical: 100,
       flexDirection: "column",
       marginVertical: 50,
     },
     welcomeText: {
-      fontSize: 60,
+      fontSize: 45,
       fontWeight: "bold",
       fontFamily: "Georgia",
-      marginBottom: 20,
+      marginVertical: -140,
     },
     text: {
       fontSize: 15,
@@ -67,9 +66,7 @@ const Classes = () => {
     forgotText: {
       paddingHorizontal: 2,
     },
-    pressableText: {
-      alignSelf: "flex-end",
-    },
+   
   });
 
 

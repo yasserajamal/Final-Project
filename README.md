@@ -4,7 +4,7 @@ StudAudio
 
 Description: Allowing Users to School On-The-Go with Audio. 
 Style Guide:
-For headings, we used Georgia and for actual screen contents we used: Arial.
+For headings, we used Georgia and for actual screen contents we used: Arial. For titles, the font is 50, for other text 15-20
 
 
 Tasks 
@@ -27,7 +27,10 @@ Tasks
 
 
 
-Files
+Work Cited
+
+1. The Ultimate Guide to the Hamburger Menu and Its Alternatives (https://uxplanet.org/the-ultimate-guide-to-the-hamburger-menu-and-its-alternatives-e2da8dc7f1db)
+2. Custom Bottom Tab Navigator in React Native (https://www.youtube.com/watch?v=gPaBicMaib4)
 
 
 
