@@ -6,54 +6,79 @@ import {
   StyleSheet,
   useWindowDimensions,
   Pressable,
+  ActivityIndicator,
 } from "react-native";
 
 import { CustomInput, CustomButton } from "../../../components";
 import { useNavigation } from "@react-navigation/native";
+import{FireBaseAuth} from '../../../firebase';
+import{signInWithEmailAndPassword} from 'firebase/auth';
 
-//  <Image source={Images.spotify} style={styles.topIcon} />
+
 const SignInScreen = ({ route }) => {
-  const { username, setUsername } = useState("");
-  const { password, setPassword } = useState("");
+  const [ Email, setEmail ] = useState("");
+  const [ password, setPassword ] = useState("");
+  const [loading, setLoading] = useState(false);
   const setIsAuthenticated= route.params?.setIsAuthenticated;
   const navigation = useNavigation();
-  const ifSignInPressed = () => {
-    setIsAuthenticated(true); // set to false if authentication fails
-  };
+  const ifSignInPressed = async () => {
+    setLoading(true);
+    try {
+      
+      const response = await signInWithEmailAndPassword(FireBaseAuth, Email, password);
+      console.log(response);
+      setLoading(false);
+      setIsAuthenticated(true); // set to false if authentication fails
+    } catch(error){
+      console.log(error);
+      alert("Sign in failed: " + error.message);
+      setLoading(false);
+    }
+  }
   const ifforgotPressed = () => {
     navigation.navigate("Forgot Password");
   };
+
   const ifSignUpPressed = () => {
     return navigation.navigate("Sign Up");
   };
+
 
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>Welcome{"\n"}learner!</Text>
       <CustomInput
-        placeholder="Username or Email"
-        input={username}
-        setInput={setUsername}
+        value={Email}
+        placeholder="Email"
+        autoCapitalize= "none"
+        onChangeText= {(text) => setEmail(text)}
         secureTextEntry={false}
       />
       <CustomInput
-        placeholder="Password"
         input={password}
-        setInput={setPassword}
+        placeholder="Password"
+        autoCapitalize= "none" // avoid misspelling
+        onChangeText= {(text) => setPassword(text)}
         secureTextEntry={true}
       />
-      <Pressable onPress={ifforgotPressed} style={styles.pressableText}>
-        <Text style={styles.forgotText}> Forgot password?</Text>
-      </Pressable>
-      <CustomButton text="Sign In" onPress={ifSignInPressed} />
-      <Text style={styles.text}> {"\n"}Don't have an account yet? </Text>
-      <CustomButton
-        text="Sign up"
-        onPress={ifSignUpPressed}
-        type="secondary"
-        fgcolor={"black"}
-        bgcolor={"white"}
-      />
+      {loading ? (
+        <ActivityIndicator size="large" color="blacl" />
+      ) : (
+        <>
+          <CustomButton text="Sign In" onPress={ifSignInPressed} />
+          <Pressable onPress={ifforgotPressed} style={styles.pressableText}>
+            <Text style={styles.forgotText}>Forgot password?</Text>
+          </Pressable>
+          <Text style={styles.text}>{"\n"}Don't have an account yet?</Text>
+          <CustomButton
+            text="Sign up"
+            onPress={ifSignUpPressed}
+            type="secondary"
+            fgcolor={"black"}
+            bgcolor={"white"}
+          />
+        </>
+      )}
     </View>
   );
 };

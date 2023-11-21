@@ -2,16 +2,17 @@ import React from 'react'
 import {View, Text, TextInput, StyleSheet, Alert} from 'react-native'
 
 
-const CustomInput = ({input, setInput, placeholder, secureTextEntry}) => {
+const CustomInput = ({value, onChangeText, placeholder, secureTextEntry}) => {
    return (
     <View style = {styles.container}>
         <TextInput 
-          input = {input}
-          onChangeText={setInput}
+          value = {value}
+          onChangeText={onChangeText}
           placeholder= {placeholder}
           placeholderTextColor={'black'}
           secureTextEntry = {secureTextEntry} 
-          style = {styles.input}
+          style = {styles.value}
+          autoCapitalize= "none"
         
         />
     </View>
@@ -29,7 +30,7 @@ container: {
     marginVertical: 15, //space username and password
 
 },
-input: {
+value: {
   color: 'black',
   height: 20,
   fontSize: 18,

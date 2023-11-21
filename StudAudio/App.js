@@ -29,6 +29,11 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator} from '@react-navigation/drawer';
 import BottomTabs from './components/bottomTabs';
+
+// set up libraries for backend sign in/up stuff
+
+
+
 const Stack = createStackNavigator();
 //const AppStack= createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -61,7 +66,6 @@ function AuthStack({setIsAuthenticated}) {
       <Stack.Screen name="Sign In" component={SignInScreen} initialParams={{ setIsAuthenticated}}/>
       <Stack.Screen name="Sign Up" component={SignUpScreen}/>
       <Stack.Screen name="Forgot Password" component={ForgotPassword}/>
-      <Stack.Screen name="Reset Password" component={ResetPassword}/>
     </Stack.Navigator>
    
   );

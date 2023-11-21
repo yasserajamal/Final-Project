@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Pressable, Linking } from "react-native";
+import { View, Text, StyleSheet, Pressable, Linking, ActivityIndicator, KeyboardAvoidingView } from "react-native";
 import { Themes, Images } from "../../../assets/Themes";
 import { CustomInput, CustomButton } from "../../../components";
 import { useNavigation } from "@react-navigation/native";
-
+import{FireBaseAuth} from '../../../firebase';
+import{createUserWithEmailAndPassword} from 'firebase/auth';
 const openURL = (url) => {
   Linking.canOpenURL(url)
     .then((supported) => {
@@ -18,18 +19,33 @@ const openURL = (url) => {
 
 //  <Image source={Images.spotify} style={styles.topIcon} />
 const SignUpScreen = () => {
-  const { username, setUsername } = useState("");
-  const { email, setEmail } = useState("");
-  const { password, setPassword } = useState("");
-  const { Confirmpassword, setConfirmPassword } = useState("");
+  const [ email, setEmail ] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [ password, setPassword ] = useState("");
+  const [ Confirmpassword, setConfirmPassword ] = useState("");
   const navigation = useNavigation();
   const ifSignInPressed = () => {
     navigation.navigate("Sign In");
   };
 
-  const ifRegisterPressed = () => {
-    navigation.navigate("Sign In");
-  };
+  const ifRegisterPressed = async () => {
+    if (password !== Confirmpassword) {
+      alert("Passwords do not match. Please try again.");
+      return; // Early return if passwords do not match
+    }
+    setLoading(true);
+    try {
+      const response = await createUserWithEmailAndPassword(FireBaseAuth, email, password);
+      console.log(response);
+      alert("Congratulations! Account created successfully. Please sign in to get started!");
+      return navigation.navigate("Sign In");
+    } catch(error) {
+      console.log(error);
+      alert("Sign in failed: " + error.message);
+    }
+    finally{
+      setLoading(false);
+    }};
   const ifTermsPressed = () => {
     openURL(
       "https://docs.google.com/document/d/1eL0uzS15OJWaSkXorewW8P24biUdESN3ncedmaHjt3o/edit?usp=sharing"
@@ -45,48 +61,40 @@ const SignUpScreen = () => {
     <View style={styles.container}>
       <Text style={styles.CreateAccountText}>Create an account</Text>
       <CustomInput
-        placeholder="Username"
-        input={username}
-        setInput={setUsername}
-        secureTextEntry={false}
-      />
-      <CustomInput
         placeholder="Email"
-        input={email}
-        setInput={setEmail}
+        value={email}
+        onChangeText= {(text) => setEmail(text)}
         secureTextEntry={false}
       />
       <CustomInput
         placeholder="Password"
         input={password}
-        setInput={setPassword}
+        onChangeText= {(text) => setPassword(text)}
         secureTextEntry={true}
       />
       <CustomInput
         placeholder="Confirm Password"
-        input={Confirmpassword}
-        setInput={setConfirmPassword}
+        value={Confirmpassword}
+        onChangeText= {(text) => setConfirmPassword(text)}
         secureTextEntry={true}
       />
-      <CustomButton text="Register" onPress={ifRegisterPressed} />
-      <Text style={styles.text}>
-        By registering, you confirm that you accept our {""}
-        <Text style={styles.web} onPress={ifTermsPressed}>
-          {" "}
-          Terms of Use {""}{" "}
+   {loading ? (
+      <ActivityIndicator size="large" color="black" />
+    ) : (
+      <>
+        <CustomButton text="Register" onPress={ifRegisterPressed} />
+        <Text style={styles.text}>
+          By registering, you confirm that you accept our 
+          <Text style={styles.web} onPress={ifTermsPressed}> Terms of Use </Text>
+          and 
+          <Text style={styles.web} onPress={ifPrivacyPressed}> Privacy Policy</Text>
         </Text>
-        and {""}{" "}
-        <Text style={styles.web} onPress={ifPrivacyPressed}>
-          Privacy Policy
+        <Text style={styles.text}>
+          Have an account? 
+          <Text style={styles.bolded} onPress={ifSignInPressed}> Sign In </Text>
         </Text>
-      </Text>
-      <Text style={styles.text}>
-        Have an account?{" "}
-        <Text style={styles.bolded} onPress={ifSignInPressed}>
-          {" "}
-          Sign In{" "}
-        </Text>
-      </Text>
+      </>
+    )}
     </View>
   );
 };
