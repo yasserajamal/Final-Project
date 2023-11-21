@@ -2,16 +2,21 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  Image,
   StyleSheet,
-  useWindowDimensions,
-  Pressable,
+
 } from "react-native";
 
 import { CustomInput, CustomButton } from "../../components";
 import { useNavigation } from '@react-navigation/native';
-
-const HomeScreen = () => {
+//import type {Node} from 'react';
+import {
+    Colors,
+    DebugInstructions,
+    Header,
+    LearnMoreLinks,
+    ReloadInstructions
+} from 'react-native/Libraries/NewAppScreen';
+const Classes = () => {
     const { username, setUsername } = useState("");
     const { password, setPassword } = useState("");
     const navigation = useNavigation();
@@ -24,41 +29,34 @@ const HomeScreen = () => {
     const ifSignInCanvas = () => {
       console.warn("SIGN IN Canvas"); // TODO IMPLEMENT
     };
-    const ifSignUpPressed = () => {
-      return (
-        navigation.navigate('Sign Up')
-      );
-    };
-  
+    
     return (
       <View style={styles.container}>
-        <Text style={styles.welcomeText}>CLASSES{"\n"}</Text>
+        <Text style={styles.welcomeText}>CLASSES</Text>
         <CustomInput
-          placeholder="Username or Email"
+          placeholder="Username"
           input={username}
           setInput={setUsername}
           secureTextEntry={false}
         />
-       
-     
       </View>
     );
   };
   // canvas button :  <CustomButton text= "Sign In With Canvas" onPress = {ifSignInCanvas} type= "canvas" fgcolor="white" bgcolor = "#f70d1a"/>
   const styles = StyleSheet.create({
     container: {
-      alignItems: "center",
-      justifyContent: "center",
+      alignItems: "flex-start",
+      justifyContent: "flex-start",
       padding: 30,
       paddingVertical: 100,
       flexDirection: "column",
       marginVertical: 50,
     },
     welcomeText: {
-      fontSize: 70,
+      fontSize: 45,
       fontWeight: "bold",
       fontFamily: "Georgia",
-      marginBottom: 20,
+      marginVertical: -140,
     },
     text: {
       fontSize: 15,
@@ -68,10 +66,8 @@ const HomeScreen = () => {
     forgotText: {
       paddingHorizontal: 2,
     },
-    pressableText: {
-      alignSelf: "flex-end",
-    },
+   
   });
 
 
-export default HomeScreen;
+export default Classes;
