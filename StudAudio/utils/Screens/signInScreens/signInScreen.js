@@ -85,12 +85,14 @@ const SignInScreen = ({ route }) => {
 // canvas button :  <CustomButton text= "Sign In With Canvas" onPress = {ifSignInCanvas} type= "canvas" fgcolor="white" bgcolor = "#f70d1a"/>
 const styles = StyleSheet.create({
   container: {
+    flex:1,
+    backgroundColor:'white',
     alignItems: "center",
     justifyContent: "center",
     padding: 30,
-    paddingVertical: 100,
+   // paddingVertical: 100,
     flexDirection: "column",
-    marginVertical: 50,
+   // marginVertical: 50,
   },
   welcomeText: {
     fontSize: 70,

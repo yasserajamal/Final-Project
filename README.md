@@ -33,6 +33,8 @@ Work Cited
 1. The Ultimate Guide to the Hamburger Menu and Its Alternatives (https://uxplanet.org/the-ultimate-guide-to-the-hamburger-menu-and-its-alternatives-e2da8dc7f1db)
 2. Custom Bottom Tab Navigator in React Native (https://www.youtube.com/watch?v=gPaBicMaib4)
 3. Authentication using FireBase (https://www.youtube.com/watch?v=ONAVmsGW6-M)
+4. Options for building React Native collapsible accordions(https://blog.logrocket.com/building-react-native-collapsible-accordions/)
+
 
 
 

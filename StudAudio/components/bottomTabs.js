@@ -2,9 +2,20 @@
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { View, Text, Image } from "react-native";
-import { RecordingsScreen, Classes, Help } from "../utils";
-
+import { RecordingsScreen, Classes, Help, UnderConstructionScreen } from "../utils";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import ClassesStackNavigator from "../components/ClassesTabs";
 const BottomTab = createBottomTabNavigator();
+
+
+
+const ClassesScreens = () => {
+  return <ClassesStackNavigator/>;
+}
+
+
+
+
 
 const BottomTabs = () => {
   return (
@@ -25,7 +36,7 @@ const BottomTabs = () => {
     >
            <BottomTab.Screen
         name="Classes"
-        component={Classes}
+        component={ClassesScreens}
         options={{
           tabBarIcon: ({ focused }) => (
             <View>
@@ -69,6 +80,24 @@ const BottomTabs = () => {
           ),
         }}
       />
+
+<BottomTab.Screen
+        name="Connect"
+        component={UnderConstructionScreen}
+        options={{
+            tabBarIcon: ({ focused }) => (
+              focused 
+                ? <MaterialCommunityIcons name="message-text" size={24} color="black" />
+                : <MaterialCommunityIcons name="message-text-outline" size={24} color="black" />
+            ),
+           tabBarLabel: ({ focused }) => (
+            <Text style={{ color: focused ? "black" : "grey", fontSize: 16 }}>
+              Connect
+            </Text>
+          ),
+        }}
+      />
+      
        <BottomTab.Screen
         name="Help"
         component={Help}

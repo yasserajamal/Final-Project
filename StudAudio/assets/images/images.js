@@ -1,4 +1,4 @@
 const images = {
-    studAudio: require('../StudIcon.png'),
+    studAudio: require('../Themes/index'),
 };
 export default images;

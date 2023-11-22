@@ -4,10 +4,10 @@
     "slug": "StudAudio",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icons/iosIcon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/icons/finalSplashh.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -16,17 +16,23 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.superyasser.StudAudio"
+      "bundleIdentifier": "com.superyasser.StudAudio",
+      "icon": "./assets/icons/iosIcon.png",
+      "splash": {
+        "image": "./assets/icons/finalSplashh.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#ffffff"
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icons/finalSplashh.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.superyasser.StudAudio"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icons/iosIcon.png"
     },
     "extra": {
       "eas": {
