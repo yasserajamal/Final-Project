@@ -1,3 +1,6 @@
 import Images from '../images/images';
 import Themes from './themes';
-export {Images,Themes};
+import Stanford from "../../assets/Themes/stanford-sunset.jpeg"
+
+
+export {Images,Themes, Stanford};

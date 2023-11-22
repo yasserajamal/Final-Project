@@ -1,3 +1,4 @@
 import CustomInput from "./customInput";
 import CustomButton from "./customButton";
-export { CustomInput, CustomButton};
+import ClassesTabs from "./ClassesTabs";
+export { CustomInput, CustomButton, ClassesTabs};

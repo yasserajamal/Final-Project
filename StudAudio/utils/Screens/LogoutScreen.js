@@ -9,28 +9,29 @@ const LogoutScreen = () => {
   const isLogOut = () => {
     if(setIsAuthenticated){
       setIsAuthenticated(false);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Home' }], // this logic ensure that we don't return to logout screen once we click 'logout'
+      });
     }
-    else {
-      console.error("Authentication function not available");
-    }
- 
   }
     return (
       <View style={styles.container}>
+        <Text style={styles.logoutText}>Log Out</Text>
         <Text style={styles.text}>Oh no! You're leaving... Are you sure?</Text>
         <View style={styles.buttonContainer}>
-        <TouchableOpacity 
-          style={[styles.button, styles.yesButton]}
-          onPress={isLogOut}
-        >
-          <Text style={styles.buttonText}>Yes</Text>
-        </TouchableOpacity>
 
         <TouchableOpacity 
-          style={[styles.button, styles.noButton]}
-          onPress={() => navigation.navigate('STUAUDIO')}
+          style={[styles.button, styles.cancelButton]}
+          onPress={() => navigation.navigate('Home')}
         >
-          <Text style={styles.buttonText}>No</Text>
+          <Text style={styles.cancelText}>Cancel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity 
+          style={[styles.button, styles.exitButton]}
+          onPress={isLogOut}
+        >
+          <Text style={styles.buttonText}>Logout</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -42,34 +43,50 @@ const LogoutScreen = () => {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
+      backgroundColor:'white',
     },
     text: {
       fontSize: 25,
       marginBottom: 20,
+      fontFamily:'Arial'
+    },
+    logoutText: {
+      fontSize: 35,
+      fontFamily:'Georgia',
+      fontWeight:'bold',
+      padding:10,
     },
      buttonContainer: {
       flexDirection: 'row',
       justifyContent: 'space-around',
-      width: '80%',
+      width: '100%', 
       marginTop: 20,
     },
     button: {
-      padding: 10,
-      borderRadius: 5,
-      justifyContent: 'center',
       alignItems: 'center',
-      minWidth: 100,
+      justifyContent: 'center',
+      minWidth: 180, 
+      minHeight: 50, 
+  //    backgroundColor: 'white', 
+      borderColor: 'black', 
+      borderWidth: 1, 
+      borderRadius: 5, 
     },
-    yesButton: {
-      backgroundColor: 'green', 
+    exitButton: {
+      backgroundColor: '#E34234', 
     },
-    noButton: {
-      backgroundColor: 'red', 
+    cancelButton: {
+      borderRadiusColor:'blue',
+      color:'white'
+    },
+    cancelText: {
+      color: 'black',
     },
     buttonText: {
       color: 'white',
       fontSize: 16,
       fontWeight: 'bold',
+     // backgroundColor:'#E34234'
     },
   });
 

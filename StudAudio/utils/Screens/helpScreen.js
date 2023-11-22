@@ -89,7 +89,7 @@ const Help = () => {
       </Accordion>
       <Accordion title="Does StudAudio accommodate different learning styles?">
         <Text style={styles.textContent}>
-          StudAudio is designed with diverse learning styles in mind. It offers {'/n'}
+          StudAudio is designed with diverse learning styles in mind. It offers 
           various formats of educational content, including audio lessons,
           visual aids, and interactive modules to cater to different
           preferences.
@@ -107,7 +107,7 @@ const Help = () => {
       </Accordion>
       <Accordion title="How can I connet with other students?">
         <Text style={styles.textContent}>
-        We are in the process of developing a CONNECTED feature. 
+        We are in the process of developing a connect feature. 
         This new functionality will enable StuAudio users to connect with fellow learners who share similar backgrounds or interests.
         </Text>
       </Accordion>

@@ -30,15 +30,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator} from '@react-navigation/drawer';
 import BottomTabs from './components/bottomTabs';
 
-// set up libraries for backend sign in/up stuff
-
-
-
 const Stack = createStackNavigator();
-//const AppStack= createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-
+// TODO: update logout to be triggered by the activity indicator instead
 function HamBurger({setIsAuthenticated }) {
   return (
     <Drawer.Navigator 
@@ -51,10 +46,10 @@ function HamBurger({setIsAuthenticated }) {
     drawerInactiveTintColor: 'gray',
     
     }}>
-    <Drawer.Screen name="STUAUDIO" component={BottomTabs} options={{headerTintColor: 'black'}}/> 
-    <Drawer.Screen name="Account" component={UnderConstructionScreen}options={{headerTintColor: 'black'}}/> 
-    <Drawer.Screen name="Notifications" component={UnderConstructionScreen}options={{headerTintColor: 'black'}}/> 
-    <Drawer.Screen name="Log Out" component={LogoutScreen} initialParams={{ setIsAuthenticated }} options={{headerTintColor: 'black'}} />
+    <Drawer.Screen name="Home" component={BottomTabs} options={{headerTintColor: 'black',  headerTitle: ''}}/> 
+    <Drawer.Screen name="Account" component={UnderConstructionScreen}options={{headerTintColor: 'black',headerTitle: ''}}/> 
+    <Drawer.Screen name="Notifications" component={UnderConstructionScreen}options={{headerTintColor: 'black',headerTitle:''}}/> 
+    <Drawer.Screen name="Log Out" component={LogoutScreen} initialParams={{ setIsAuthenticated }} options={{headerTintColor: 'black',headerTitle:''}} />
   </Drawer.Navigator>
   ); 
 }
@@ -90,6 +85,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F9FBFC',
+    backgroundColor: 'white',
   },
 });
