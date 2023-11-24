@@ -2,20 +2,14 @@
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { View, Text, Image } from "react-native";
-import { RecordingsScreen, Classes, Help, UnderConstructionScreen } from "../utils";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Notes, Classes, Help, UnderConstructionScreen } from "../utils";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ClassesStackNavigator from "../components/ClassesTabs";
 const BottomTab = createBottomTabNavigator();
 
-
-
 const ClassesScreens = () => {
-  return <ClassesStackNavigator/>;
-}
-
-
-
-
+  return <ClassesStackNavigator />;
+};
 
 const BottomTabs = () => {
   return (
@@ -34,7 +28,7 @@ const BottomTabs = () => {
         tabBarInactiveTintColor: "gray", // Color for the inactive tab
       }}
     >
-           <BottomTab.Screen
+      <BottomTab.Screen
         name="Classes"
         component={ClassesScreens}
         options={{
@@ -60,7 +54,7 @@ const BottomTabs = () => {
       />
       <BottomTab.Screen
         name="Recordings"
-        component={RecordingsScreen}
+        component={Notes} //Changed to Notes for testing
         options={{
           tabBarIcon: ({ focused }) => (
             <Image
@@ -72,8 +66,8 @@ const BottomTabs = () => {
                 tintColor: focused ? "black" : "grey",
               }}
             />
-           ),
-           tabBarLabel: ({ focused }) => (
+          ),
+          tabBarLabel: ({ focused }) => (
             <Text style={{ color: focused ? "black" : "grey", fontSize: 16 }}>
               Recordings
             </Text>
@@ -81,24 +75,33 @@ const BottomTabs = () => {
         }}
       />
 
-<BottomTab.Screen
+      <BottomTab.Screen
         name="Connect"
         component={UnderConstructionScreen}
         options={{
-            tabBarIcon: ({ focused }) => (
-              focused 
-                ? <MaterialCommunityIcons name="message-text" size={24} color="black" />
-                : <MaterialCommunityIcons name="message-text-outline" size={24} color="black" />
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <MaterialCommunityIcons
+                name="message-text"
+                size={24}
+                color="black"
+              />
+            ) : (
+              <MaterialCommunityIcons
+                name="message-text-outline"
+                size={24}
+                color="black"
+              />
             ),
-           tabBarLabel: ({ focused }) => (
+          tabBarLabel: ({ focused }) => (
             <Text style={{ color: focused ? "black" : "grey", fontSize: 16 }}>
               Connect
             </Text>
           ),
         }}
       />
-      
-       <BottomTab.Screen
+
+      <BottomTab.Screen
         name="Help"
         component={Help}
         options={{
@@ -124,7 +127,6 @@ const BottomTabs = () => {
       />
     </BottomTab.Navigator>
   );
-  
 };
 
 export default BottomTabs;
