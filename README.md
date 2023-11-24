@@ -34,6 +34,7 @@ Work Cited
 2. Custom Bottom Tab Navigator in React Native (https://www.youtube.com/watch?v=gPaBicMaib4)
 3. Authentication using FireBase (https://www.youtube.com/watch?v=ONAVmsGW6-M)
 4. Options for building React Native collapsible accordions(https://blog.logrocket.com/building-react-native-collapsible-accordions/)
+5. React Native Voice (https://www.npmjs.com/package/@react-native-voice/voice?activeTab=readme)
 
 
 
