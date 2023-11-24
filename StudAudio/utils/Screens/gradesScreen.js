@@ -1,23 +1,19 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Button } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 
-const UnderConstructionScreen = () => {
-  const navigation = useNavigation();
+const Grades = () => {
     return (
       <View style={styles.container}>
         <Image 
-          source={require('../../assets/UnderConstructionScreen.gif')} 
+          source={require('../../assets/grades.gif')} 
           style={styles.image}
           resizeMode="contain"
         />
         <Text style={styles.text}>We're working on it!</Text>
-        <Text style={styles.subtext}>This feature is under construction. Check back soon!</Text>
-        <Button
-            title= "Return to Homepage"
-            onPress={() => navigation.navigate('Home')}
-        />
+        <Text style={styles.subtext}>Our Grades Feature is taking inspiration from professors everywhere 
+        and is meticulously calculating your grades</Text>
       </View>
     );
   };
@@ -46,4 +42,4 @@ const UnderConstructionScreen = () => {
     },
   });
   
-  export default UnderConstructionScreen;
+  export default Grades;

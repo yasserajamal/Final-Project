@@ -1,3 +1,5 @@
+// This is the file that implements the full authentication flow of STUAUDIo
+
 // Import the functions you need from the SDKs you need
 import { initializeApp} from "firebase/app";
 import { getAuth} from "firebase/auth";
