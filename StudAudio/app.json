@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.superyasser.StudAudio",
@@ -24,6 +22,15 @@
         "backgroundColor": "#ffffff"
       }
     },
+    "plugins": [
+      [
+        "@react-native-voice/voice",
+        {
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
+          "speechRecogntionPermission": "Allow $(PRODUCT_NAME) to securely recognize user speech"
+        }
+      ]
+    ],
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icons/finalSplashh.png",
@@ -35,9 +42,7 @@
       "favicon": "./assets/icons/iosIcon.png"
     },
     "extra": {
-      "eas": {
-        "projectId": "ae7d34fe-f9ac-4a73-b4db-4cd041ff633a"
-      }
+      "eas": {}
     }
   }
 }

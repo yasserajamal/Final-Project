@@ -2,6 +2,7 @@
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { View, Text, Image } from "react-native";
+
 import { useNavigation } from "@react-navigation/native";
 import {
   RecordingsScreen,
@@ -53,6 +54,16 @@ function ConnectStack() {
   );
 }
 
+import { Notes, Classes, Help, UnderConstructionScreen } from "../utils";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import ClassesStackNavigator from "../components/ClassesTabs";
+const BottomTab = createBottomTabNavigator();
+
+const ClassesScreens = () => {
+  return <ClassesStackNavigator />;
+};
+
+
 const BottomTabs = () => {
   return (
     <BottomTab.Navigator
@@ -90,6 +101,28 @@ const BottomTabs = () => {
           tabBarLabel: ({ focused }) => (
             <Text style={{ color: focused ? "black" : "grey", fontSize: 16 }}>
               Classes
+            </Text>
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Recordings"
+        component={Notes} //Changed to Notes for testing
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Image
+              source={require("../assets/icons/quickRecord.png")}
+              resizeMode="contain"
+              style={{
+                width: 35,
+                height: 25,
+                tintColor: focused ? "black" : "grey",
+              }}
+            />
+          ),
+          tabBarLabel: ({ focused }) => (
+            <Text style={{ color: focused ? "black" : "grey", fontSize: 16 }}>
+              Recordings
             </Text>
           ),
         }}
