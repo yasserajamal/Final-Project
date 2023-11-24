@@ -1,9 +1,11 @@
+// same as underconstruction screen but with no button to return home. This for the connect feature only
+
 import React from 'react';
 import { View, Text, StyleSheet, Image, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 
-const UnderConstructionScreen = () => {
+const UnderConstructionScreenTwo = () => {
   const navigation = useNavigation();
     return (
       <View style={styles.container}>
@@ -14,10 +16,6 @@ const UnderConstructionScreen = () => {
         />
         <Text style={styles.text}>We're working on it!</Text>
         <Text style={styles.subtext}>This feature is under construction. Check back soon!</Text>
-        <Button
-            title= "Return to Homepage"
-            onPress={() => navigation.navigate('Home')}
-        />
       </View>
     );
   };
@@ -46,4 +44,4 @@ const UnderConstructionScreen = () => {
     },
   });
   
-  export default UnderConstructionScreen;
+  export default UnderConstructionScreenTwo;

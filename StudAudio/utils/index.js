@@ -7,6 +7,11 @@ import Help from "./Screens/helpScreen";
 import RecordingsScreen from "./Screens/RecordingsScreen";
 import UnderConstructionScreen from "./Screens/UnderConstruction";
 import LogoutScreen from "./Screens/LogoutScreen";
+import UnderConstructionScreen2 from "./Screens/underConstruction2";
+import ClassesOverview from "./Screens/ClassesOverview";
+import Grades from "./Screens/gradesScreen";
+import Connect from "./Screens/connect";
+import ViewConnectionsScreen from "./Screens/viewConnections";
 export {
   SignInScreen,
   SignUpScreen,
@@ -14,7 +19,11 @@ export {
   Classes,
   Notes,
   Help,
-  RecordingsScreen,
   UnderConstructionScreen,
   LogoutScreen,
+  UnderConstructionScreen2,
+  ClassesOverview,
+  Grades,
+  Connect,
+  ViewConnectionsScreen,
 };

@@ -2,6 +2,58 @@
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { View, Text, Image } from "react-native";
+
+import { useNavigation } from "@react-navigation/native";
+import {
+  RecordingsScreen,
+  Help,
+  ViewConnectionsScreen,
+  Connect,
+} from "../utils";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import ClassesStackNavigator from "../components/ClassesTabs";
+import { createStackNavigator } from "@react-navigation/stack";
+import { TouchableOpacity } from "react-native";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+
+const BottomTab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+// entry point to the third navigator for classes
+const ClassesScreens = () => {
+  return <ClassesStackNavigator />;
+};
+
+const BackButton = () => {
+  const navigation = useNavigation();
+  return (
+    <TouchableOpacity
+      onPress={() => navigation.goBack()}
+      style={{ marginLeft: 10 }}
+    >
+      <MaterialIcons name="arrow-back" size={24} color="black" />
+    </TouchableOpacity>
+  );
+};
+
+// connect only navigator to allow going from the swiping page to the connections page
+function ConnectStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Connecttab"
+        component={Connect}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ViewConnectionsScreen"
+        component={ViewConnectionsScreen}
+        options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 import { Notes, Classes, Help, UnderConstructionScreen } from "../utils";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ClassesStackNavigator from "../components/ClassesTabs";
@@ -10,6 +62,7 @@ const BottomTab = createBottomTabNavigator();
 const ClassesScreens = () => {
   return <ClassesStackNavigator />;
 };
+
 
 const BottomTabs = () => {
   return (
@@ -77,7 +130,7 @@ const BottomTabs = () => {
 
       <BottomTab.Screen
         name="Connect"
-        component={UnderConstructionScreen}
+        component={ConnectStack}
         options={{
           tabBarIcon: ({ focused }) =>
             focused ? (

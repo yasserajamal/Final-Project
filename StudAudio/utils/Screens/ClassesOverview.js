@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+// The following file contains the screen that shows all the available actions within a class
+
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,20 +9,28 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from "react-native";
+
+import { CustomInput, CustomButton } from "../../components";
 import { useNavigation } from '@react-navigation/native';
 
-const classesList = [
-  { id: '1', title: 'ARABLANG 12', screenName: 'ClassesOverview' ,backgroundImage:require("../../assets/Themes/arabic.jpeg")},
-  { id: '2', title: 'CS 157', screenName: 'UnderconstructionScreen', backgroundImage: require("../../assets/Themes/stanford-sunset.jpeg")},
-  { id: '3', title: 'MATH 51', screenName: 'MATH 51', backgroundImage:require("../../assets/Themes/math.jpeg") },
-  { id: '4', title: 'PHIL 180', screenName: 'PHIL 180' ,backgroundImage:require("../../assets/Themes/PHIl.png")},
+
+const classesList = [ // here you can add the screens for completing the assignments
+  { id: '1', title: 'ASSIGNMENTS', screenName: 'Assignments' ,backgroundImage:require("../../assets/Themes/Assignments.jpg")},
+  { id: '2', title: 'NOTES', screenName: 'NOTES', backgroundImage: require("../../assets/Themes/notessss.png")},
+  { id: '3', title: 'READINGS', screenName: 'READINGS', backgroundImage:require("../../assets/Themes/myreadings.jpeg") },
+  { id: '4', title: 'GRADES', screenName: 'Grades' ,backgroundImage:require("../../assets/Themes/mygradess.webp")},
 
 ]
 
-const Classes = () => {
-    const navigation = useNavigation();
+const ClassesOverview = ({ route, navigation }) => {
+    // FYI we use route/useEffect to make it look like we have multiple classoverview screens for each class
+    const{className} = route.params;
+    useEffect(() => {
+        navigation.setOptions({ title: className });
+      }, [className, navigation]);
+
     const renderItem = ({ item }) => (
-      <TouchableOpacity onPress={() => navigation.navigate('ClassesOverview', { className: item.title })}> 
+      <TouchableOpacity onPress={() => navigation.navigate(item.screenName)}>
         <ImageBackground 
           source={item.backgroundImage}
           style={styles.classButton}
@@ -35,12 +45,13 @@ const Classes = () => {
     
     return (
       <View style={styles.container}>
-         <Text style={styles.TitleText}>CLASSES</Text>
+         <Text style={styles.TitleText}>{className}</Text>
          <FlatList
             data={classesList}
             renderItem={renderItem}
             keyExtractor={item => item.id}
-      />    
+      />
+       
       </View>
     );
   };
@@ -80,4 +91,4 @@ const Classes = () => {
   });
 
 
-export default Classes;
+export default ClassesOverview;
