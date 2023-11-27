@@ -5,7 +5,9 @@ import { View, Text, Image } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
 import {
-  RecordingsScreen,
+  Notes,
+  Classes,
+  UnderConstruction,
   Help,
   ViewConnectionsScreen,
   Connect,
@@ -53,16 +55,6 @@ function ConnectStack() {
     </Stack.Navigator>
   );
 }
-
-import { Notes, Classes, Help, UnderConstructionScreen } from "../utils";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import ClassesStackNavigator from "../components/ClassesTabs";
-const BottomTab = createBottomTabNavigator();
-
-const ClassesScreens = () => {
-  return <ClassesStackNavigator />;
-};
-
 
 const BottomTabs = () => {
   return (

@@ -1,10 +1,18 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Pressable, Linking, ActivityIndicator, KeyboardAvoidingView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  Linking,
+  ActivityIndicator,
+  KeyboardAvoidingView,
+} from "react-native";
 import { Themes, Images } from "../../../assets/Themes";
 import { CustomInput, CustomButton } from "../../../components";
 import { useNavigation } from "@react-navigation/native";
-import{FireBaseAuth} from '../../../firebase';
-import{createUserWithEmailAndPassword} from 'firebase/auth';
+import { FireBaseAuth } from "../../../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 const openURL = (url) => {
   Linking.canOpenURL(url)
     .then((supported) => {
@@ -19,10 +27,10 @@ const openURL = (url) => {
 
 //  <Image source={Images.spotify} style={styles.topIcon} />
 const SignUpScreen = () => {
-  const [ email, setEmail ] = useState("");
+  const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const [ password, setPassword ] = useState("");
-  const [ Confirmpassword, setConfirmPassword ] = useState("");
+  const [password, setPassword] = useState("");
+  const [Confirmpassword, setConfirmPassword] = useState("");
   const navigation = useNavigation();
   const ifSignInPressed = () => {
     navigation.navigate("Sign In");
@@ -35,17 +43,23 @@ const SignUpScreen = () => {
     }
     setLoading(true);
     try {
-      const response = await createUserWithEmailAndPassword(FireBaseAuth, email, password);
+      const response = await createUserWithEmailAndPassword(
+        FireBaseAuth,
+        email,
+        password
+      );
       console.log(response);
-      alert("Congratulations! Account created successfully. Please sign in to get started!");
+      alert(
+        "Congratulations! Account created successfully. Please sign in to get started!"
+      );
       return navigation.navigate("Sign In");
-    } catch(error) {
+    } catch (error) {
       console.log(error);
       alert("Sign in failed: " + error.message);
-    }
-    finally{
+    } finally {
       setLoading(false);
-    }};
+    }
+  };
   const ifTermsPressed = () => {
     openURL(
       "https://docs.google.com/document/d/1eL0uzS15OJWaSkXorewW8P24biUdESN3ncedmaHjt3o/edit?usp=sharing"
@@ -63,38 +77,47 @@ const SignUpScreen = () => {
       <CustomInput
         placeholder="Email"
         value={email}
-        onChangeText= {(text) => setEmail(text)}
+        onChangeText={(text) => setEmail(text)}
         secureTextEntry={false}
       />
       <CustomInput
         placeholder="Password"
         input={password}
-        onChangeText= {(text) => setPassword(text)}
+        onChangeText={(text) => setPassword(text)}
         secureTextEntry={true}
       />
       <CustomInput
         placeholder="Confirm Password"
         value={Confirmpassword}
-        onChangeText= {(text) => setConfirmPassword(text)}
+        onChangeText={(text) => setConfirmPassword(text)}
         secureTextEntry={true}
       />
-   {loading ? (
-      <ActivityIndicator size="large" color="black" />
-    ) : (
-      <>
-        <CustomButton text="Register" onPress={ifRegisterPressed} />
-        <Text style={styles.text}>
-          By registering, you confirm that you accept our 
-          <Text style={styles.web} onPress={ifTermsPressed}> Terms of Use </Text>
-          and 
-          <Text style={styles.web} onPress={ifPrivacyPressed}> Privacy Policy</Text>
-        </Text>
-        <Text style={styles.text}>
-          Have an account? 
-          <Text style={styles.bolded} onPress={ifSignInPressed}> Sign In </Text>
-        </Text>
-      </>
-    )}
+      {loading ? (
+        <ActivityIndicator size="large" color="black" />
+      ) : (
+        <>
+          <CustomButton text="Register" onPress={ifRegisterPressed} />
+          <Text style={styles.text}>
+            By registering, you confirm that you accept our
+            <Text style={styles.web} onPress={ifTermsPressed}>
+              {" "}
+              Terms of Use{" "}
+            </Text>
+            and
+            <Text style={styles.web} onPress={ifPrivacyPressed}>
+              {" "}
+              Privacy Policy
+            </Text>
+          </Text>
+          <Text style={styles.text}>
+            Have an account?
+            <Text style={styles.bolded} onPress={ifSignInPressed}>
+              {" "}
+              Sign In{" "}
+            </Text>
+          </Text>
+        </>
+      )}
     </View>
   );
 };

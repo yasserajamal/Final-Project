@@ -39,6 +39,8 @@
 	</dict>
 	<key>UILaunchStoryboardName</key>
 	<string>SplashScreen</string>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>Allow $(StudAudio) to access your microphone</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
