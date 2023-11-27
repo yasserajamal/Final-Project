@@ -29,6 +29,10 @@
           "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
           "speechRecogntionPermission": "Allow $(PRODUCT_NAME) to securely recognize user speech"
         }
+        // "expo-speech",
+        // {
+        //   "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
+        // }
       ]
     ],
     "android": {

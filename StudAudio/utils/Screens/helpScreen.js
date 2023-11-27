@@ -53,7 +53,7 @@ const Help = () => {
           email with steps to create a new password.
         </Text>
       </Accordion>
-      <Accordion title="Is StuAudio free?">
+      <Accordion title="Is StudAudio free?">
         <Text style={styles.textContent}>
           Yes, StudAudio is completely free to use. We firmly believe that adult
           learners should have easy and unhindered access to resources that
@@ -89,7 +89,7 @@ const Help = () => {
       </Accordion>
       <Accordion title="Does StudAudio accommodate different learning styles?">
         <Text style={styles.textContent}>
-          StudAudio is designed with diverse learning styles in mind. It offers 
+          StudAudio is designed with diverse learning styles in mind. It offers
           various formats of educational content, including audio lessons,
           visual aids, and interactive modules to cater to different
           preferences.
@@ -105,10 +105,11 @@ const Help = () => {
           for the best learning experience with StudAudio.
         </Text>
       </Accordion>
-      <Accordion title="How can I connet with other students?">
+      <Accordion title="How can I connect with other students?">
         <Text style={styles.textContent}>
-        We are in the process of developing a connect feature. 
-        This new functionality will enable StuAudio users to connect with fellow learners who share similar backgrounds or interests.
+          We are in the process of developing a connect feature. This new
+          functionality will enable StudAudio users to connect with fellow
+          learners who share similar backgrounds or interests.
         </Text>
       </Accordion>
     </ScrollView>
