@@ -21,18 +21,21 @@ const SignInScreen = ({ route }) => {
   const setIsAuthenticated = route.params?.setIsAuthenticated;
   const navigation = useNavigation();
   const ifSignInPressed = async () => {
-    // setLoading(true);
-    // try {
-
-    //   const response = await signInWithEmailAndPassword(FireBaseAuth, Email, password);
-    //   console.log(response);
-    //   setLoading(false);
-    //   setIsAuthenticated(true); // set to false if authentication fails
-    // } catch(error){
-    //   console.log(error);
-    //   alert("Sign in failed: " + error.message);
-    //   setLoading(false);
-    // }
+    setLoading(true);
+    try {
+      const response = await signInWithEmailAndPassword(
+        FireBaseAuth,
+        Email,
+        password
+      );
+      console.log(response);
+      setLoading(false);
+      setIsAuthenticated(true); // set to false if authentication fails
+    } catch (error) {
+      console.log(error);
+      alert("Sign in failed: " + error.message);
+      setLoading(false);
+    }
     setIsAuthenticated(true);
   };
   const ifforgotPressed = () => {
