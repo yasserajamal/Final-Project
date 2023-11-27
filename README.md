@@ -43,8 +43,8 @@ Resources
 6. How to Build React Native Swipe Cards Inspired by Tinder (https://instamobile.io/react-native-controls/react-native-swipe-cards-tinder/)
 7. react-native-deck-swiper (https://www.npmjs.com/package/react-native-deck-swiper)
 8. Expo Audio (https://docs.expo.dev/versions/latest/sdk/audio/)
-]
-5. React Native Voice (https://www.npmjs.com/package/@react-native-voice/voice?activeTab=readme)
+9. React Native Voice (https://www.npmjs.com/package/@react-native-voice/voice?activeTab=readme)
+10. Expo-Speech https://docs.expo.dev/versions/latest/sdk/speech/
 
 
 
