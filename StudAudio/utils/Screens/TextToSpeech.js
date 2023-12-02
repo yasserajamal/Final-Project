@@ -53,7 +53,7 @@ const TextToSpeech = ({ passedData }) => {
       <Button color="black" style="button" title="Listen" onPress={speak} />
       <View style={styles.sliders}>
         <View style={styles.group}>
-          <Text> Pitch </Text>
+          <Text style={styles.text}> Pitch </Text>
           <Slider
             style={{ width: 200, height: 40 }}
             minimumValue={0}
@@ -65,7 +65,7 @@ const TextToSpeech = ({ passedData }) => {
           />
         </View>
         <View style={styles.group}>
-          <Text>Speed</Text>
+          <Text style={styles.text}>Speed</Text>
           <Slider
             style={{ width: 200, height: 40 }}
             minimumValue={0}
@@ -124,6 +124,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     width: 200,
+  },
+  text: {
+    fontSize: 18,
+    fontFamily: "Arial",
+    textAlign: "center",
+    marginHorizontal: 15,
+    marginVertical: 10,
+    position: "relative",
   },
 });
 export default TextToSpeech;

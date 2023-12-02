@@ -11,15 +11,19 @@ import {
 } from "react-native";
 
 import Voice, { SpeechResultsEvent } from "@react-native-voice/voice";
+import { withNavigation } from "@react-navigation/compat";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type Props = {};
 type State = {
   results: string[],
+  //noteCounter: number,
 };
 
 class Notes extends Component<Props, State> {
   state = {
     results: [],
+    //noteCounter: 1,
   };
 
   constructor(props: Props) {
@@ -53,6 +57,7 @@ class Notes extends Component<Props, State> {
   _stopRecognizing = async () => {
     try {
       await Voice.stop();
+      this.props.navigation.goBack();
     } catch (e) {
       console.error(e);
     }
@@ -61,12 +66,39 @@ class Notes extends Component<Props, State> {
   _destroyRecognizer = async () => {
     try {
       await Voice.destroy();
+      //await this._saveNote(this.state.noteCounter, this.state.results);
+      this.props.navigation.push("NotesNext", {
+        noteContent: this.state.results,
+      });
     } catch (e) {
       console.error(e);
     }
     this.setState({
       results: [],
     });
+  };
+
+  _saveNote = async (noteNumber, noteText) => {
+    try {
+      const storedCount = await AsyncStorage.getItem("noteCounter");
+      const curCount = storedCount ? parseInt(storedCount) : 1;
+      await AsyncStorage.setItem("noteCounter", `${curCount + 1}`);
+
+      await AsyncStorage.setItem(
+        `Note ${curCount}`,
+        JSON.stringify({
+          noteNum: noteNumber,
+          content: noteText,
+        })
+      );
+      this.setState((prevState) => ({
+        noteCounter: prevState.noteCounter + 1,
+      }));
+
+      console.log("Note saved successfully!");
+    } catch (error) {
+      console.error("Error saving note:", error);
+    }
   };
 
   render() {
@@ -92,10 +124,10 @@ class Notes extends Component<Props, State> {
           />
         </TouchableHighlight>
         <View style={styles.buttons}>
-          <Pressable style={styles.new} onPress={this._stopRecognizing}>
+          <Pressable style={styles.new} onPress={this._destroyRecognizer}>
             <Text style={styles.finish}>{"FINISH"}</Text>
           </Pressable>
-          <Pressable style={styles.new} onPress={this._destroyRecognizer}>
+          <Pressable style={styles.new} onPress={this._stopRecognizing}>
             <Text style={styles.cancel}>{"CANCEL"}</Text>
           </Pressable>
         </View>
@@ -120,16 +152,18 @@ const styles = StyleSheet.create({
   cancel: {
     color: "red",
     fontFamily: "Arial",
+    fontSize: 20,
   },
   finish: {
     color: "black",
     fontFamily: "Arial",
+    fontSize: 20,
   },
   new: {
     padding: 10,
     backgroundColor: "#ededed",
     margin: 15,
-    width: 85,
+    width: 108,
     alignItems: "center",
     borderRadius: 10,
     borderColor: "black",
@@ -148,26 +182,27 @@ const styles = StyleSheet.create({
     fontFamily: "Arial",
   },
   welcome: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10,
-    fontFamily: "Arial",
+    fontSize: 28,
     fontWeight: "bold",
+    fontFamily: "Georgia",
+    marginHorizontal: 15,
+    marginVertical: 10,
+    position: "relative",
   },
   instructions: {
     textAlign: "center",
-    color: "#333333",
+    color: "black",
     marginBottom: 5,
     fontFamily: "Arial",
-    fontSize: 15,
+    fontSize: 18,
   },
   stat: {
     textAlign: "center",
     color: "black",
     marginBottom: 1,
-    fontSize: 15,
+    fontSize: 18,
     fontFamily: "Arial",
   },
 });
 
-export default Notes;
+export default withNavigation(Notes);

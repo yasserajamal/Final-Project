@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   FlatList,
   SafeAreaView,
+  LogBox,
 } from "react-native";
 import { useState } from "react";
 import {
@@ -91,6 +92,7 @@ function AppStacks({ setIsAuthenticated }) {
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  //LogBox.ignoreAllLogs();
   return (
     <NavigationContainer>
       {isAuthenticated ? (

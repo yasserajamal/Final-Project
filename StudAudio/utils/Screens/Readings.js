@@ -12,23 +12,27 @@ import { useNavigation } from "@react-navigation/native";
 const readingsList = [
   {
     id: "1",
-    title: "Invisible Women",
+    title: "INVISIBLE WOMEN",
     screenName: "ReadingsOverview",
+    backgroundImage: require("../../assets/Themes/reading1.jpg"),
   },
   {
     id: "2",
-    title: "The Discipline of Teams",
+    title: "THE DISCIPLINE OF TEAMS",
     screenName: "ReadingsOverview",
+    backgroundImage: require("../../assets/Themes/reading2.jpg"),
   },
   {
     id: "3",
-    title: "Successful Brainstorming",
+    title: "SUCCESSFULL BRAINSTORMING",
     screenName: "ReadingsOverview",
+    backgroundImage: require("../../assets/Themes/reading4.jpg"),
   },
   {
     id: "4",
-    title: "Design Critiques at Figma",
+    title: "DESIGN CRITIQUES",
     screenName: "ReadingsOverview",
+    backgroundImage: require("../../assets/Themes/reading3.jpg"),
   },
 ];
 

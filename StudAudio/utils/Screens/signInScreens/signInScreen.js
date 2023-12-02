@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 2,
   },
   pressableText: {
-    alignSelf: "flex-end",
+    alignSelf: "center",
   },
 });
 

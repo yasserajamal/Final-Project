@@ -5,12 +5,15 @@ import { View, Text, Image } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
 import {
-  Notes,
   Classes,
   UnderConstruction,
   Help,
   ViewConnectionsScreen,
   Connect,
+  Notes,
+  NotesOverview,
+  NotesText,
+  NotesNext,
 } from "../utils";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ClassesStackNavigator from "../components/ClassesTabs";
@@ -50,6 +53,33 @@ function ConnectStack() {
       <Stack.Screen
         name="ViewConnectionsScreen"
         component={ViewConnectionsScreen}
+        options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function NoteStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Notetab"
+        component={Notes}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="NotesNext"
+        component={NotesNext}
+        options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
+      />
+      <Stack.Screen
+        name="NotesScreen"
+        component={NotesOverview}
+        options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
+      />
+      <Stack.Screen
+        name="NotesText"
+        component={NotesText}
         options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
       />
     </Stack.Navigator>
@@ -99,7 +129,7 @@ const BottomTabs = () => {
       />
       <BottomTab.Screen
         name="Recordings"
-        component={Notes} //Changed to Notes for testing
+        component={NoteStack}
         options={{
           tabBarIcon: ({ focused }) => (
             <Image

@@ -8,7 +8,12 @@ import {
   Readings,
   SignInScreen,
   ClassesOverview,
+  ShareScreen,
   ReadingsOverview,
+  NotesOverview,
+  NotesText,
+  NotesNext,
+  ShareNote,
   UnderConstructionScreen2,
 } from "../utils";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
@@ -48,13 +53,38 @@ function ClassesStackNavigator() {
         options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
       />
       <classesStack.Screen
+        name="NotesOverview"
+        component={NotesOverview}
+        options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
+      />
+      <classesStack.Screen
+        name="NotesText"
+        component={NotesText}
+        options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
+      />
+      <classesStack.Screen
+        name="NotesNext"
+        component={NotesNext}
+        options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
+      />
+      <classesStack.Screen
+        name="ShareNote"
+        component={ShareNote}
+        options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
+      />
+      <classesStack.Screen
+        name="ShareScreen"
+        component={ShareScreen}
+        options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
+      />
+      <classesStack.Screen
         name="Grades"
         component={Grades}
         options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
       />
       <classesStack.Screen
-        name="NOTES"
-        component={UnderConstructionScreen2}
+        name="Notes"
+        component={Notes}
         options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
       />
       <classesStack.Screen
