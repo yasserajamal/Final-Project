@@ -21,7 +21,7 @@ const Q2 = ({ navigation }) => {
     { label: "Q1", value: "Q1" },
     { label: "Q2", value: "Q2" },
   ]);
-  const defaultOption = "Q1";
+  const defaultOption = "Q2";
 
   useEffect(() => {
     Voice.onSpeechResults = onSpeechResults;
@@ -90,7 +90,7 @@ const Q2 = ({ navigation }) => {
           setItems={setItems}
           onChangeValue={onRateChange}
           defaultOption={defaultOption}
-          placeholder={"Q1"}
+          placeholder={"Q2"}
           style={{
             zIndex: 999,
             justifyContent: "flex-end",
@@ -102,10 +102,6 @@ const Q2 = ({ navigation }) => {
             width: 80,
             zIndex: 9999,
           }}
-          // onSelectItem={(item) => {
-          //   setRate(item.value);
-          //   onRateChange(item.value);
-          // }}
           dropDownContainerStyle={{
             //marginTop: -140,
             marginLeft: -70,

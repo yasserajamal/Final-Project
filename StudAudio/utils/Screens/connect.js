@@ -16,7 +16,7 @@ const Data = [
     id: "1",
     name: "Michael",
     bio: "Dad, Husband, Tech Founder",
-    info: "Also taking: CS 157",
+    info: "Also taking: CS 147",
     image: require("../../assets/Connect/Michael.jpg"),
   },
   {
@@ -45,7 +45,7 @@ const Data = [
     id: "5",
     name: "Eric",
     bio: "Educator diving into ed-tech",
-    info: "Also taking: CS 157, MATH 51 ",
+    info: "Also taking: CS 147, MATH 51 ",
     image: require("../../assets/Connect/Eric.jpg"),
   },
 ];

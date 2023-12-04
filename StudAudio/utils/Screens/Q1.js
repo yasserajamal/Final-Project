@@ -12,11 +12,12 @@ import TextToSpeechAssn from "./TextToSpeechAssn";
 import Voice, { SpeechResultsEvent } from "@react-native-voice/voice";
 import DropDownPicker from "react-native-dropdown-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFocusEffect } from "@react-navigation/native";
 
 const Q1 = ({ navigation }) => {
   const [results, setResults] = useState([]);
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState("Q1");
   const [items, setItems] = useState([
     { label: "Q1", value: "Q1" },
     { label: "Q2", value: "Q2" },
@@ -25,11 +26,17 @@ const Q1 = ({ navigation }) => {
 
   useEffect(() => {
     Voice.onSpeechResults = onSpeechResults;
+    setValue("Q1");
 
     return () => {
       Voice.destroy().then(Voice.removeAllListeners);
     };
   }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      setValue("Q1");
+    }, [])
+  );
 
   const onSpeechResults = (e: SpeechResultsEvent) => {
     console.log("onSpeechResults: ", e);
@@ -67,7 +74,8 @@ const Q1 = ({ navigation }) => {
     setResults([]);
   };
 
-  const onRateChange = (value) => {
+  const onRateChange = async (value) => {
+    console.log(value);
     setValue(value);
     if (value === "Q2") {
       navigation.push("Q2");
@@ -101,10 +109,6 @@ const Q1 = ({ navigation }) => {
             width: 80,
             zIndex: 9999,
           }}
-          // onSelectItem={(item) => {
-          //   setRate(item.value);
-          //   onRateChange(item.value);
-          // }}
           dropDownContainerStyle={{
             //marginTop: -140,
             marginLeft: -70,
@@ -115,6 +119,7 @@ const Q1 = ({ navigation }) => {
         />
         <Text style={styles.TitleText}>Q1</Text>
       </View>
+      <Text style={styles.welcome}>Listen to Question</Text>
       <TextToSpeechAssn
         style={{ zIndex: 999 }}
         passedData={selectedReading}
