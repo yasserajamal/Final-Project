@@ -7,12 +7,15 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  TextInput,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { FontAwesome } from "@expo/vector-icons";
 
 const NotesText = ({ route }) => {
   const { noteName } = route.params;
   const [noteContent, setNoteContent] = useState("");
+  const [editName, setEditName] = useState(noteName);
 
   useEffect(() => {
     loadNoteContent();
@@ -31,9 +34,36 @@ const NotesText = ({ route }) => {
     }
   };
 
+  const editNoteName = async () => {
+    try {
+      console.log(editName);
+      await AsyncStorage.removeItem(noteName);
+      setEditName(editName);
+      // await AsyncStorage.setItem(
+      //   editName,
+      //   JSON.stringify({ content: noteContent })
+      // );
+      await AsyncStorage.setItem(
+        editName,
+        JSON.stringify({
+          noteNum: editName,
+          content: noteContent,
+        })
+      );
+    } catch (error) {
+      console.error("Error editing note name:", error);
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.noteName}>{noteName}</Text>
+      {/* <Text style={styles.noteName}>{noteName}</Text> */}
+      <TextInput
+        style={styles.noteName}
+        value={editName}
+        onChangeText={(text) => setEditName(text)}
+        onBlur={editNoteName}
+      />
       <ScrollView style={styles.textbox}>
         <Text style={styles.noteContent}>{noteContent}</Text>
       </ScrollView>
@@ -55,6 +85,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 2,
     padding: 5,
+  },
+  notetext: {
+    fontSize: 20,
+    fontFamily: "Arial",
+    textAlign: "center",
+    marginHorizontal: 15,
+    marginVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "black",
   },
   noteName: {
     fontSize: 30,

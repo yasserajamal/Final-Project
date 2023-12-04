@@ -6,13 +6,22 @@ import {
   UnderConstructionScreen,
   Grades,
   Readings,
+  Assignments,
   SignInScreen,
   ClassesOverview,
   ShareScreen,
   ReadingsOverview,
   NotesOverview,
   NotesText,
+  Q1,
+  Q2,
+  Q3,
+  Q4,
   NotesNext,
+  Q1Next,
+  Q2Next,
+  Q3Next,
+  Q4Next,
   ShareNote,
   UnderConstructionScreen2,
 } from "../utils";
@@ -53,6 +62,46 @@ function ClassesStackNavigator() {
         options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
       />
       <classesStack.Screen
+        name="Q1"
+        component={Q1}
+        options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
+      />
+      <classesStack.Screen
+        name="Q2"
+        component={Q2}
+        options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
+      />
+      <classesStack.Screen
+        name="Q3"
+        component={Q3}
+        options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
+      />
+      <classesStack.Screen
+        name="Q4"
+        component={Q4}
+        options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
+      />
+      <classesStack.Screen
+        name="Q1Next"
+        component={Q1Next}
+        options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
+      />
+      <classesStack.Screen
+        name="Q2Next"
+        component={Q2Next}
+        options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
+      />
+      <classesStack.Screen
+        name="Q3Next"
+        component={Q3Next}
+        options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
+      />
+      <classesStack.Screen
+        name="Q4Next"
+        component={Q4Next}
+        options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
+      />
+      <classesStack.Screen
         name="NotesOverview"
         component={NotesOverview}
         options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
@@ -89,7 +138,7 @@ function ClassesStackNavigator() {
       />
       <classesStack.Screen
         name="Assignments"
-        component={UnderConstructionScreen2}
+        component={Assignments}
         options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
       />
       <classesStack.Screen

@@ -4451,6 +4451,11 @@ ci-info@^3.2.0, ci-info@^3.3.0:
   resolved "https://registry.npmjs.org/ci-info/-/ci-info-3.9.0.tgz"
   integrity sha512-NIxF55hv4nSqQswkAeiOi1r83xy8JldOFDTWiug55KBu9Jnblncd2U6ViHmYgHf01TPZS77NJBhBMKdWj9HQMQ==
 
+classnames@^2.2.3:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.2.tgz#351d813bf0137fcc6a76a16b88208d2560a0d924"
+  integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
+
 clean-stack@^2.0.0:
   version "2.2.0"
   resolved "https://registry.npmjs.org/clean-stack/-/clean-stack-2.2.0.tgz"
@@ -5183,10 +5188,10 @@ expo-router@^2.0.13:
     schema-utils "^4.0.1"
     url "^0.11.0"
 
-expo-speech@~11.3.0:
-  version "11.3.0"
-  resolved "https://registry.npmjs.org/expo-speech/-/expo-speech-11.3.0.tgz"
-  integrity sha512-pJLh8pLuMJRZrg7hzS4JtMwvjbgfCkmoERL45A8vkq8VQFo+2GPT72BMuC9xy1sys7CGZJ8M5yMYTE5saUr1rg==
+expo-speech@^11.5.0:
+  version "11.5.0"
+  resolved "https://registry.yarnpkg.com/expo-speech/-/expo-speech-11.5.0.tgz#1e8076c1d2208aa98ce1681fdff1ac2bdab337f8"
+  integrity sha512-NKrMs9oy+577MGBRVwyPGNZNy5RmNYrPdYGBD/098RJY6LByR+1NC0gpraOTnI4U9swwcTCNBbtZ25a2ijQzzw==
 
 expo-splash-screen@~0.20.2, expo-splash-screen@~0.20.5:
   version "0.20.5"
@@ -7628,6 +7633,13 @@ react-dom@^18.2.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
+react-dropdown@^1.11.0:
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/react-dropdown/-/react-dropdown-1.11.0.tgz#b9576de17efd28e5684d101b3f58dfe784af242c"
+  integrity sha512-E2UWetRPxNdIhQahXw6b984ME7WmcgDj9AEAjrtS/oyLCFVo+2qkCfcS06C22JR0Zj+YLnygwv0Ozf6VKKDq7g==
+  dependencies:
+    classnames "^2.2.3"
+
 react-fast-compare@^3.2.0:
   version "3.2.2"
   resolved "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-3.2.2.tgz"
@@ -7670,6 +7682,11 @@ react-native-deck-swiper@^2.0.16:
   integrity sha512-uXUe0uua6B6hwMzyB7Q34bebhAgrw2EqF6z2uNoxlT1HJ6igy6eXUR34ON48BYXP+yPFFBdBE5R7nCuBezUhrQ==
   dependencies:
     prop-types "15.5.10"
+
+react-native-dropdown-picker@^5.4.6:
+  version "5.4.6"
+  resolved "https://registry.yarnpkg.com/react-native-dropdown-picker/-/react-native-dropdown-picker-5.4.6.tgz#3736fc468de4a295e4df8d1f65ed2eadaf9b445f"
+  integrity sha512-T1XBHbE++M6aRU3wFYw3MvcOuabhWZ29RK/Ivdls2r1ZkZ62iEBZknLUPeVLMX3x6iUxj4Zgr3X2DGlEGXeHsA==
 
 react-native-gesture-handler@~2.12.0:
   version "2.12.1"

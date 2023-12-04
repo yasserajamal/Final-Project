@@ -44,7 +44,10 @@ const ReadingsOverview = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.TitleText}>{readingName}</Text>
-      <TextToSpeech passedData={selectedReading.title}></TextToSpeech>
+      <TextToSpeech
+        style={{ zIndex: 999 }}
+        passedData={selectedReading.title}
+      ></TextToSpeech>
       <ScrollView style={styles.textbox}>
         <Text style={styles.text}>{selectedReading.title}</Text>
       </ScrollView>
@@ -60,6 +63,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     justifyContent: "center",
+    zindex: 5,
   },
   textbox: {
     width: 350,
@@ -67,6 +71,7 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderRadius: 10,
     borderWidth: 2,
+    zindex: 5,
   },
   text: {
     fontSize: 20,

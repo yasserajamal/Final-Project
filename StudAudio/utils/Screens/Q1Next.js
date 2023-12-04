@@ -10,71 +10,27 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import TextToSpeechAssn from "./TextToSpeechAssn";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const NotesNext = ({ route, navigation }) => {
-  const { noteContent } = route.params;
-  const [num, setNum] = useState(1);
-  const [editName, setEditName] = useState("Note " + num);
-  useEffect(() => {
-    const loadCount = async () => {
-      const storedCount = await AsyncStorage.getItem("noteCounter");
-      const count = storedCount ? parseInt(storedCount) : 1;
-      setNum(count);
-      setEditName("Note " + count);
-    };
-    loadCount();
-  }, []);
-  const editNoteName = async () => {
-    try {
-      console.log(editName);
-      //await AsyncStorage.removeItem(noteName);
-      setEditName(editName);
-      await AsyncStorage.setItem(
-        editName,
-        JSON.stringify({ content: noteContent })
-      );
-    } catch (error) {
-      console.error("Error editing note name:", error);
-    }
-  };
+const Q1Next = ({ route, navigation }) => {
+  const { noteContent, question } = route.params;
+  useEffect(() => {}, []);
 
   _saveNote = async () => {
     try {
-      const storedCount = await AsyncStorage.getItem("noteCounter");
-      const curCount = storedCount ? parseInt(storedCount) : 1;
-      await AsyncStorage.setItem("noteCounter", `${curCount + 1}`);
-
-      console.log(editName);
-      console.log(`Note ${curCount}`);
-      console.log(`Note ${curCount}` == editName);
-      if (`Note ${curCount}` != editName) {
-        await AsyncStorage.setItem(
-          editName,
-          JSON.stringify({
-            noteNum: editName,
-            content: noteContent,
-          })
-        );
-        console.log("Note saved successfully!");
-        navigation.push("NotesOverview", {
-          noteName: editName,
-          noteContent: noteContent,
-        });
-      } else {
-        await AsyncStorage.setItem(
-          `Note ${curCount}`,
-          JSON.stringify({
-            noteNum: curCount,
-            content: noteContent,
-          })
-        );
-        console.log("Note saved successfully!");
-        navigation.push("NotesOverview", {
-          noteName: num,
-          noteContent: noteContent,
-        });
-      }
+      await AsyncStorage.setItem(
+        `Q1`,
+        JSON.stringify({
+          content: noteContent,
+        })
+      );
+      console.log("Note saved successfully!");
+      // navigation.push("NotesOverview", {
+      //   noteName: num,
+      //   noteContent: noteContent,
+      // });
+      navigation.push("Q2");
 
       // await AsyncStorage.setItem(
       //   `Note ${curCount}`,
@@ -94,16 +50,15 @@ const NotesNext = ({ route, navigation }) => {
   };
 
   //setEditName("Note " + num);
-  console.log(num);
-  console.log(editName);
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.welcome}>{"Note " + num}</Text> */}
-      <TextInput
-        style={styles.welcome}
-        onChangeText={setEditName}
-        value={editName}
-      />
+      <Text style={styles.welcome}>Q1</Text>
+      <Text style={styles.welcome}>Question</Text>
+      <TextToSpeechAssn
+        style={{ zIndex: 999 }}
+        passedData={question}
+      ></TextToSpeechAssn>
+      <Text style={styles.welcome}>Answer</Text>
       <ScrollView style={styles.textbox}>
         <Text style={styles.noteContent}>{noteContent}</Text>
       </ScrollView>
@@ -169,7 +124,7 @@ const styles = StyleSheet.create({
   },
   textbox: {
     backgroundColor: "#ededed",
-    width: 350,
+    width: 380,
     margin: 7,
     borderColor: "black",
     borderRadius: 10,
@@ -228,4 +183,4 @@ const styles = StyleSheet.create({
     fontFamily: "Arial",
   },
 });
-export default NotesNext;
+export default Q1Next;

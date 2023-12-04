@@ -28,7 +28,7 @@ PODS:
     - React-NativeModulesApple
     - React-RCTAppDelegate
     - ReactCommon/turbomodule/core
-  - ExpoSpeech (11.3.0):
+  - ExpoSpeech (11.5.0):
     - ExpoModulesCore
   - ExpoWebBrowser (12.3.2):
     - ExpoModulesCore
@@ -732,7 +732,7 @@ SPEC CHECKSUMS:
   ExpoHead: d47ffee7504f0c399e71235db0e069ee54ad482a
   ExpoKeepAwake: be4cbd52d9b177cde0fd66daa1913afa3161fc1d
   ExpoModulesCore: c480fd4e3c7c8e81f0a6ba3a7c56869f25fe016d
-  ExpoSpeech: 3c06cdcd31c07889a9f7085c2496ab97364427be
+  ExpoSpeech: 8a73bb7e6e84a5b5b8dbaabd5b4f287bec39bf3b
   ExpoWebBrowser: 2c788f9c07718a780fe6d8bf2f6195c47609faaa
   EXSplashScreen: c0e7f2d4a640f3b875808ed0b88575538daf6d82
   FBLazyVector: 748c0ef74f2bf4b36cfcccf37916806940a64c32

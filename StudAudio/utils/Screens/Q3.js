@@ -5,28 +5,19 @@ import {
   View,
   Image,
   TouchableHighlight,
-  Button,
   Pressable,
   ScrollView,
 } from "react-native";
-import { CustomInput, CustomButton } from "../../components";
+import TextToSpeechAssn from "./TextToSpeechAssn";
 import Voice, { SpeechResultsEvent } from "@react-native-voice/voice";
-import { withNavigation } from "@react-navigation/compat";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-type Props = {};
-type State = {
-  results: string[],
-  //noteCounter: number,
-};
-
-class Notes extends Component<Props, State> {
+class Q3 extends Component {
   state = {
     results: [],
-    //noteCounter: 1,
   };
 
-  constructor(props: Props) {
+  constructor(props) {
     super(props);
     Voice.onSpeechResults = this.onSpeechResults;
   }
@@ -63,12 +54,12 @@ class Notes extends Component<Props, State> {
     }
   };
 
-  _destroyRecognizer = async () => {
+  _destroyRecognizer = async (selectedReading) => {
     try {
       await Voice.destroy();
-      //await this._saveNote(this.state.noteCounter, this.state.results);
-      this.props.navigation.push("NotesNext", {
+      this.props.navigation.push("Q3Next", {
         noteContent: this.state.results,
+        question: selectedReading,
       });
     } catch (e) {
       console.error(e);
@@ -78,36 +69,23 @@ class Notes extends Component<Props, State> {
     });
   };
 
-  _saveNote = async (noteNumber, noteText) => {
-    try {
-      const storedCount = await AsyncStorage.getItem("noteCounter");
-      const curCount = storedCount ? parseInt(storedCount) : 1;
-      await AsyncStorage.setItem("noteCounter", `${curCount + 1}`);
-
-      await AsyncStorage.setItem(
-        `Note ${curCount}`,
-        JSON.stringify({
-          noteNum: noteNumber,
-          content: noteText,
-        })
-      );
-      this.setState((prevState) => ({
-        noteCounter: prevState.noteCounter + 1,
-      }));
-
-      console.log("Note saved successfully!");
-    } catch (error) {
-      console.error("Error saving note:", error);
-    }
-  };
-
   render() {
+    const { navigation, route } = this.props;
+    const selectedReading =
+      "Q1: This is the first question. What is a primary color?";
+
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>New Voice Recording</Text>
-        <Text style={styles.instructions}>
+        <Text style={styles.TitleText}>Q1</Text>
+        <Text style={styles.welcome}>Listen to Question</Text>
+        <TextToSpeechAssn
+          style={{ zIndex: 999 }}
+          passedData={selectedReading}
+        ></TextToSpeechAssn>
+        <Text style={styles.welcome}>Record Answer</Text>
+        {/* <Text style={styles.instructions}>
           Press the microphone and start speaking.
-        </Text>
+        </Text> */}
         <ScrollView style={styles.textbox}>
           {this.state.results.map((result, index) => {
             return (
@@ -127,7 +105,10 @@ class Notes extends Component<Props, State> {
           <Pressable style={styles.test2} onPress={this._stopRecognizing}>
             <Text style={styles.test}>{"Cancel"}</Text>
           </Pressable>
-          <Pressable style={styles.test2} onPress={this._destroyRecognizer}>
+          <Pressable
+            style={styles.test2}
+            onPress={() => this._destroyRecognizer(selectedReading)}
+          >
             <Text style={styles.test}>{"Finish"}</Text>
           </Pressable>
         </View>
@@ -137,9 +118,41 @@ class Notes extends Component<Props, State> {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: "100%",
+    backgroundColor: "white",
+    alignItems: "center",
+    padding: 10,
+    justifyContent: "center",
+    zindex: 5,
+  },
+
+  text: {
+    fontSize: 20,
+    fontFamily: "Arial",
+    textAlign: "center",
+    marginHorizontal: 15,
+    marginVertical: 10,
+    position: "relative",
+  },
+  TitleText: {
+    fontSize: 35,
+    fontWeight: "bold",
+    fontFamily: "Georgia",
+    marginHorizontal: 15,
+    marginVertical: 10,
+    textAlign: "center",
+  },
+  new: {
+    alignContent: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    flex: 1,
+  },
   textbox: {
     backgroundColor: "#ededed",
-    width: 350,
+    width: 380,
     margin: 7,
     borderColor: "black",
     borderRadius: 10,
@@ -222,4 +235,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(Notes);
+export default Q3;

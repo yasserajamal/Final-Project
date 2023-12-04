@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FontAwesome } from "@expo/vector-icons";
+import { useFocusEffect } from "@react-navigation/native";
 
 const NotesOverview = ({ route, navigation }) => {
   const [notesArray, setNotesArray] = useState([]);
@@ -23,15 +24,34 @@ const NotesOverview = ({ route, navigation }) => {
     loadData();
   }, [navigation]);
 
+  useFocusEffect(
+    React.useCallback(() => {
+      const loadData = async () => {
+        await load();
+      };
+      loadData();
+    }, [])
+  );
+
   const load = async () => {
     try {
-      // Retrieve all notes using AsyncStorage.getAllKeys and AsyncStorage.multiGet
-      //const cle = await AsyncStorage.clear();
       const allKeys = await AsyncStorage.getAllKeys();
       const allNotes = await AsyncStorage.multiGet(allKeys);
 
       const parsedNotes = allNotes
-        .filter(([key]) => key !== "noteCounter")
+        .filter(
+          ([key]) =>
+            key !== "noteCounter" &&
+            key !== "Assignment 0 Submitted" &&
+            key !== "Assignment 1 Submitted" &&
+            key !== "Assignment 2 Submitted" &&
+            key !== "Assignment 1" &&
+            key !== "Assignment 2" &&
+            key !== "Q1" &&
+            key !== "Q2" &&
+            key !== "Q3" &&
+            key !== "Q4"
+        )
         .sort()
         .map(([key, value]) => ({
           noteName: key,
@@ -44,12 +64,30 @@ const NotesOverview = ({ route, navigation }) => {
       console.error("Error loading notes:", error);
     }
   };
+  const deleteNote = async (noteName) => {
+    try {
+      console.log(noteName);
+      await AsyncStorage.removeItem(noteName);
+      load();
+    } catch (error) {
+      console.error("Error loading notes:", error);
+    }
+  };
 
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => navigate(item.noteName)}>
       <View style={styles.overlay}>
         <Text style={styles.text}>{item.noteName}</Text>
-        <FontAwesome name="share" size={24} color="black" onPress={share} />
+        <View style={styles.close}>
+          <FontAwesome
+            name="trash"
+            size={24}
+            color="black"
+            onPress={() => deleteNote(item.noteName)}
+            style={{ marginRight: 15 }}
+          />
+          <FontAwesome name="share" size={24} color="black" onPress={share} />
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -124,6 +162,10 @@ const styles = StyleSheet.create({
     width: 360,
     marginBottom: 16,
     alignContent: "center",
+  },
+  close: {
+    justifyContent: "space-between",
+    flexDirection: "row",
   },
 });
 
