@@ -109,9 +109,12 @@ const styles = StyleSheet.create({
   },
   forgotText: {
     paddingHorizontal: 2,
+    fontSize: 15,
+    fontWeight: "light",
+    fontFamily: "Georgia",
   },
   pressableText: {
-    alignSelf: "flex-end",
+    alignSelf: "center",
   },
 });
 

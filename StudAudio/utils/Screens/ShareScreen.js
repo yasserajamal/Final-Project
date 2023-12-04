@@ -6,10 +6,15 @@ import {
   Text,
   StyleSheet,
   FlatList,
+  Button,
   TouchableOpacity,
   ImageBackground,
+  TextInput,
+  Pressable,
+  Alert,
 } from "react-native";
 
+import Dialog, { DialogContent } from "react-native-popup-dialog";
 import { CustomInput, CustomButton } from "../../components";
 import { useNavigation } from "@react-navigation/native";
 
@@ -41,35 +46,32 @@ const classesList = [
   },
 ];
 
-const ClassesOverview = ({ route, navigation }) => {
+const ShareScreen = ({ route, navigation }) => {
   // FYI we use route/useEffect to make it look like we have multiple classoverview screens for each class
-  const { className } = route.params;
-  useEffect(() => {
-    navigation.setOptions({ title: className });
-  }, [className, navigation]);
+  const { share } = route.params;
+  console.log(share);
+  const [text, onChangeText] = React.useState("");
 
-  const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => navigation.navigate(item.screenName)}>
-      <ImageBackground
-        source={item.backgroundImage}
-        style={styles.classButton}
-        imageStyle={styles.backgroundImage}
-      >
-        <View style={styles.overlay}>
-          <Text style={styles.classButtonText}>{item.title}</Text>
-        </View>
-      </ImageBackground>
-    </TouchableOpacity>
-  );
+  const createAlert = () =>
+    Alert.alert("Success", "Note Successfully Sent", [
+      { text: "OK", onPress: () => navigation.navigate("NotesOverview") },
+    ]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.TitleText}>{className}</Text>
-      <FlatList
-        data={classesList}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-      />
+      <Text style={styles.TitleText}>{share}</Text>
+      <View style={styles.center}>
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeText}
+          value={text}
+          placeholder="Enter contact information"
+        />
+
+        <TouchableOpacity onPress={createAlert} style={{ marginLeft: 10 }}>
+          <Text style={styles.textnew}>Submit</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -81,6 +83,13 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     alignItems: "flex-start",
   },
+  center: {
+    flex: 1,
+    width: "100%",
+    backgroundColor: "white",
+    alignItems: "center",
+    paddingTop: 20,
+  },
   TitleText: {
     fontSize: 45,
     fontWeight: "bold",
@@ -88,6 +97,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     marginVertical: 10,
     position: "relative",
+  },
+  textnew: {
+    fontSize: 25,
+    fontFamily: "Arial",
+    marginHorizontal: 15,
+    marginVertical: 10,
   },
   classButton: {
     marginVertical: 10,
@@ -105,6 +120,16 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Arial",
   },
+  input: {
+    height: 50,
+    width: 350,
+    borderWidth: 1,
+    fontSize: 20,
+    fontFamily: "Arial",
+    textAlign: "center",
+    marginBottom: 20,
+    marginTop: 10,
+  },
 });
 
-export default ClassesOverview;
+export default ShareScreen;

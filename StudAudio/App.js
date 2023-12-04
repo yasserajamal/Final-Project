@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   FlatList,
   SafeAreaView,
+  LogBox,
 } from "react-native";
 import { useState } from "react";
 import {
@@ -25,10 +26,30 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import BottomTabs from "./components/bottomTabs";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
-
+const setDefaultNotes = async () => {
+  try {
+    await AsyncStorage.setItem(
+      "Assignment 1",
+      JSON.stringify({ content: "Q1", date: "12/05/23" })
+    );
+    await AsyncStorage.setItem(
+      "Assignment 2",
+      JSON.stringify({ content: "Q3", date: "12/11/23" })
+    );
+    await AsyncStorage.setItem(
+      "Assignment 0 Submitted",
+      JSON.stringify({ content: "Assignment 0" })
+    );
+    await AsyncStorage.removeItem("Assignment 1 Submitted");
+    await AsyncStorage.removeItem("Assignment 2 Submitted");
+  } catch (error) {
+    console.error("Error editing note name:", error);
+  }
+};
 // TODO: update logout to be triggered by the activity indicator instead
 function HamBurger({ setIsAuthenticated }) {
   return (
@@ -91,6 +112,8 @@ function AppStacks({ setIsAuthenticated }) {
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  //LogBox.ignoreAllLogs();
+  setDefaultNotes();
   return (
     <NavigationContainer>
       {isAuthenticated ? (

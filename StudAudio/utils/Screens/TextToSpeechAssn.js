@@ -6,7 +6,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
 import DropDownPicker from "react-native-dropdown-picker";
 
-const TextToSpeech = ({ passedData }) => {
+const TextToSpeechAssn = ({ passedData }) => {
   const [pitch, setPitch] = useState(1);
   const [rate, setRate] = useState(1);
   const [firstPlay, setPlay] = useState(false);
@@ -95,7 +95,7 @@ const TextToSpeech = ({ passedData }) => {
 
   return (
     <View style={styles.container}>
-      <Button color="black" style="button" title="Listen" onPress={speak} />
+      <Button color="black" style="button" title={passedData} onPress={speak} />
       <View style={styles.sliders}>
         <View style={styles.group}>
           {/* <Text style={styles.text}> Pitch </Text>
@@ -172,12 +172,16 @@ const TextToSpeech = ({ passedData }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#b5b4b0",
+    backgroundColor: "#ededed",
     justifyContent: "center",
     alignItems: "center",
     paddingBottom: 12,
     paddingHorizontal: 10,
+    width: 380,
+    margin: 7,
+    borderColor: "black",
     borderRadius: 10,
+    borderWidth: 2,
   },
   sliders: {
     flexDirection: "column",
@@ -212,4 +216,4 @@ const styles = StyleSheet.create({
     position: "relative",
   },
 });
-export default TextToSpeech;
+export default TextToSpeechAssn;
