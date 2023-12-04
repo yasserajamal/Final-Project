@@ -40,6 +40,17 @@ const BackButton = () => {
     </TouchableOpacity>
   );
 };
+const BackButtonClasses = () => {
+  const navigation = useNavigation();
+  return (
+    <TouchableOpacity
+      onPress={() => navigation.navigate("AllClasses")}
+      style={{ marginLeft: 10 }}
+    >
+      <MaterialIcons name="arrow-back" size={24} color="black" />
+    </TouchableOpacity>
+  );
+};
 // To rewire make changes to each component mainly for the ones set to UnderConstructionScreen2
 const classesStack = createStackNavigator();
 // Note: we add the BackButton to all screens exceot classes since its the main screen; we made a custom back button to get a button while getting rid of the title
@@ -104,7 +115,10 @@ function ClassesStackNavigator() {
       <classesStack.Screen
         name="NotesOverview"
         component={NotesOverview}
-        options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
+        options={{
+          headerTitle: () => null,
+          headerLeft: () => <BackButtonClasses />,
+        }}
       />
       <classesStack.Screen
         name="NotesText"
@@ -139,7 +153,10 @@ function ClassesStackNavigator() {
       <classesStack.Screen
         name="Assignments"
         component={Assignments}
-        options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
+        options={{
+          headerTitle: () => null,
+          headerLeft: () => <BackButtonClasses />,
+        }}
       />
       <classesStack.Screen
         name="READINGS"

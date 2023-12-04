@@ -49,7 +49,11 @@ const ClassesOverview = ({ route, navigation }) => {
   }, [className, navigation]);
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => navigation.navigate(item.screenName)}>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate(item.screenName, { className: className })
+      }
+    >
       <ImageBackground
         source={item.backgroundImage}
         style={styles.classButton}

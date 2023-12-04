@@ -13,9 +13,18 @@ import {
 } from "react-native";
 import TextToSpeechAssn from "./TextToSpeechAssn";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import DropDownPicker from "react-native-dropdown-picker";
 
 const Q4Next = ({ route, navigation }) => {
   const { noteContent, question } = route.params;
+  const [results, setResults] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    { label: "Q1", value: "Q1" },
+    { label: "Q2", value: "Q2" },
+  ]);
+  const defaultOption = "Q2";
   useEffect(() => {}, []);
 
   const createAlert = () =>
@@ -24,6 +33,7 @@ const Q4Next = ({ route, navigation }) => {
       "You cannot undo a submission.",
       [{ text: "No" }, { text: "Yes", onPress: () => this._saveNote() }]
     );
+
   _saveNote = async () => {
     try {
       await AsyncStorage.setItem(
@@ -61,11 +71,49 @@ const Q4Next = ({ route, navigation }) => {
       console.error("Error saving note:", error);
     }
   };
+  const onRateChange = async (value) => {
+    setValue(value);
+    if (value === "Q1") {
+      navigation.navigate("Q3");
+      //navigation.push("Q1"); //go to q1next
+    }
+  };
 
   //setEditName("Note " + num);
   return (
     <View style={styles.container}>
-      <Text style={styles.welcome}>Q2</Text>
+      <View style={styles.both}>
+        <DropDownPicker
+          open={open}
+          value={value}
+          items={items}
+          setOpen={setOpen}
+          setValue={setValue}
+          setItems={setItems}
+          onChangeValue={onRateChange}
+          defaultOption={defaultOption}
+          placeholder={"Q2"}
+          style={{
+            zIndex: 999,
+            justifyContent: "flex-end",
+            marginLeft: -70,
+            marginTop: 10,
+          }}
+          containerStyle={{
+            position: "relative",
+            width: 80,
+            zIndex: 9999,
+          }}
+          dropDownContainerStyle={{
+            //marginTop: -140,
+            marginLeft: -70,
+            marginTop: -50,
+            zIndex: 9999,
+          }}
+          listItemContainerStyle={{ height: 30 }}
+        />
+        <Text style={styles.TitleText}>Q2</Text>
+      </View>
       <Text style={styles.welcome}>Question</Text>
       <TextToSpeechAssn
         style={{ zIndex: 999 }}
@@ -111,6 +159,19 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     margin: 15, //space username and password
     alignItems: "center",
+  },
+  both: {
+    flexDirection: "row",
+    marginEnd: 80,
+    padding: 5,
+  },
+  TitleText: {
+    fontSize: 35,
+    fontWeight: "bold",
+    fontFamily: "Georgia",
+    marginHorizontal: 15,
+    marginVertical: 10,
+    textAlign: "center",
   },
   test: {
     color: "white",
@@ -181,7 +242,7 @@ const styles = StyleSheet.create({
     fontFamily: "Arial",
   },
   welcome: {
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: "bold",
     fontFamily: "Georgia",
     marginHorizontal: 15,

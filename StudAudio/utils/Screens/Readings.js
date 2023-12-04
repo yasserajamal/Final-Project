@@ -9,35 +9,116 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const readingsList = [
-  {
-    id: "1",
-    title: "INVISIBLE WOMEN",
-    screenName: "ReadingsOverview",
-    backgroundImage: require("../../assets/Themes/reading1.jpg"),
-  },
-  {
-    id: "2",
-    title: "THE DISCIPLINE OF TEAMS",
-    screenName: "ReadingsOverview",
-    backgroundImage: require("../../assets/Themes/reading2.jpg"),
-  },
-  {
-    id: "3",
-    title: "SUCCESSFULL BRAINSTORMING",
-    screenName: "ReadingsOverview",
-    backgroundImage: require("../../assets/Themes/reading4.jpg"),
-  },
-  {
-    id: "4",
-    title: "DESIGN CRITIQUES",
-    screenName: "ReadingsOverview",
-    backgroundImage: require("../../assets/Themes/reading3.jpg"),
-  },
-];
+const readingsList = {
+  "PHIL 180": [
+    {
+      id: "1",
+      title: "PROPOSITIONS AND THEIR NEIGHBORS",
+      screenName: "ReadingsOverview",
+      backgroundImage: require("../../assets/Themes/reading1.jpg"),
+    },
+    {
+      id: "2",
+      title: "THE NECESSARY AND THE POSSIBLE",
+      screenName: "ReadingsOverview",
+      backgroundImage: require("../../assets/Themes/reading2.jpg"),
+    },
+    {
+      id: "3",
+      title: "CAUSATION",
+      screenName: "ReadingsOverview",
+      backgroundImage: require("../../assets/Themes/reading4.jpg"),
+    },
+    {
+      id: "4",
+      title: "THE NATURE OF TIME",
+      screenName: "ReadingsOverview",
+      backgroundImage: require("../../assets/Themes/reading3.jpg"),
+    },
+  ],
+  "ARABLANG 12": [
+    {
+      id: "1",
+      title: "ARAB CIVILIZATION",
+      screenName: "ReadingsOverview",
+      backgroundImage: require("../../assets/Themes/reading1.jpg"),
+    },
+    {
+      id: "2",
+      title: "PRE-ISLAMIC ARABIA",
+      screenName: "ReadingsOverview",
+      backgroundImage: require("../../assets/Themes/reading2.jpg"),
+    },
+    {
+      id: "3",
+      title: "ORTHODOX CALIPHATE",
+      screenName: "ReadingsOverview",
+      backgroundImage: require("../../assets/Themes/reading4.jpg"),
+    },
+    {
+      id: "4",
+      title: "UMAYYAD DYNASTY",
+      screenName: "ReadingsOverview",
+      backgroundImage: require("../../assets/Themes/reading3.jpg"),
+    },
+  ],
+  "CS 147": [
+    {
+      id: "1",
+      title: "INVISIBLE WOMEN",
+      screenName: "ReadingsOverview",
+      backgroundImage: require("../../assets/Themes/reading1.jpg"),
+    },
+    {
+      id: "2",
+      title: "THE DISCIPLINE OF TEAMS",
+      screenName: "ReadingsOverview",
+      backgroundImage: require("../../assets/Themes/reading2.jpg"),
+    },
+    {
+      id: "3",
+      title: "SUCCESSFULL BRAINSTORMING",
+      screenName: "ReadingsOverview",
+      backgroundImage: require("../../assets/Themes/reading4.jpg"),
+    },
+    {
+      id: "4",
+      title: "DESIGN CRITIQUES",
+      screenName: "ReadingsOverview",
+      backgroundImage: require("../../assets/Themes/reading3.jpg"),
+    },
+  ],
+  "MATH 51": [
+    {
+      id: "1",
+      title: "VECTOR AND SCALARS",
+      screenName: "ReadingsOverview",
+      backgroundImage: require("../../assets/Themes/reading1.jpg"),
+    },
+    {
+      id: "2",
+      title: "VECTOR GEOMETRY",
+      screenName: "ReadingsOverview",
+      backgroundImage: require("../../assets/Themes/reading2.jpg"),
+    },
+    {
+      id: "3",
+      title: "LINEAR TRANSFORMATIONS",
+      screenName: "ReadingsOverview",
+      backgroundImage: require("../../assets/Themes/reading4.jpg"),
+    },
+    {
+      id: "4",
+      title: "FURTHER MATRIX ALGEBRA",
+      screenName: "ReadingsOverview",
+      backgroundImage: require("../../assets/Themes/reading3.jpg"),
+    },
+  ],
+};
 
-const Readings = () => {
-  const navigation = useNavigation();
+const Readings = ({ route, navigation }) => {
+  const { className } = route.params;
+  const specificList = readingsList[className] || [];
   const renderItem = ({ item }) => (
     <TouchableOpacity
       onPress={() =>
@@ -61,7 +142,7 @@ const Readings = () => {
     <View style={styles.container}>
       <Text style={styles.TitleText}>READINGS</Text>
       <FlatList
-        data={readingsList}
+        data={specificList}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />

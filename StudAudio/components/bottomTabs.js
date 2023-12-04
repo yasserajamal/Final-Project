@@ -127,28 +127,6 @@ const BottomTabs = () => {
           ),
         }}
       />
-      <BottomTab.Screen
-        name="Recordings"
-        component={NoteStack}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <Image
-              source={require("../assets/icons/quickRecord.png")}
-              resizeMode="contain"
-              style={{
-                width: 35,
-                height: 25,
-                tintColor: focused ? "black" : "grey",
-              }}
-            />
-          ),
-          tabBarLabel: ({ focused }) => (
-            <Text style={{ color: focused ? "black" : "grey", fontSize: 16 }}>
-              Recordings
-            </Text>
-          ),
-        }}
-      />
 
       <BottomTab.Screen
         name="Connect"
