@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.superyasser.StudAudio",
@@ -20,7 +22,8 @@
         "image": "./assets/icons/finalSplashh.png",
         "resizeMode": "contain",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "runtimeVersion": "1.0.0"
     },
     "plugins": [
       [
@@ -29,10 +32,6 @@
           "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
           "speechRecogntionPermission": "Allow $(PRODUCT_NAME) to securely recognize user speech"
         }
-        // "expo-speech",
-        // {
-        //   "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
-        // }
       ]
     ],
     "android": {
@@ -40,13 +39,24 @@
         "foregroundImage": "./assets/icons/finalSplashh.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.superyasser.StudAudio"
+      "package": "com.superyasser.StudAudio",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "runtimeVersion": {
+        "policy": "appVersion"
+      }
     },
     "web": {
       "favicon": "./assets/icons/iosIcon.png"
     },
     "extra": {
-      "eas": {}
+      "eas": {
+        "projectId": "2fffda26-f394-46d2-9f3d-aa66ab712409"
+      }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/2fffda26-f394-46d2-9f3d-aa66ab712409"
     }
   }
 }
