@@ -33,12 +33,6 @@ const classesList = [
     screenName: "READINGS",
     backgroundImage: require("../../assets/Themes/myreadings.jpeg"),
   },
-  {
-    id: "4",
-    title: "GRADES",
-    screenName: "Grades",
-    backgroundImage: require("../../assets/Themes/mygradess.webp"),
-  },
 ];
 
 const ClassesOverview = ({ route, navigation }) => {

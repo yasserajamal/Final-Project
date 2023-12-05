@@ -16,7 +16,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import DropDownPicker from "react-native-dropdown-picker";
 
 const Q4Next = ({ route, navigation }) => {
-  const { noteContent, question } = route.params;
+  const { noteContent, question, className } = route.params;
   const [results, setResults] = useState([]);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
@@ -53,20 +53,7 @@ const Q4Next = ({ route, navigation }) => {
         "Assignment 2 Submitted",
         JSON.stringify({ content: "Assignment 2" })
       );
-      navigation.push("Assignments");
-
-      // await AsyncStorage.setItem(
-      //   `Note ${curCount}`,
-      //   JSON.stringify({
-      //     noteNum: curCount,
-      //     content: noteContent,
-      //   })
-      // );
-      // console.log("Note saved successfully!");
-      // navigation.push("NotesOverview", {
-      //   noteName: num,
-      //   noteContent: noteContent,
-      // });
+      navigation.push("Assignments", { className });
     } catch (error) {
       console.error("Error saving note:", error);
     }
@@ -74,7 +61,7 @@ const Q4Next = ({ route, navigation }) => {
   const onRateChange = async (value) => {
     setValue(value);
     if (value === "Q1") {
-      navigation.navigate("Q3");
+      navigation.navigate("Q3", { className });
       //navigation.push("Q1"); //go to q1next
     }
   };

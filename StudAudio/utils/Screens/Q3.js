@@ -14,7 +14,8 @@ import DropDownPicker from "react-native-dropdown-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
 
-const Q3 = ({ navigation }) => {
+const Q3 = ({ route, navigation }) => {
+  const { className } = route.params;
   const [results, setResults] = useState([]);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Q1");
@@ -23,6 +24,15 @@ const Q3 = ({ navigation }) => {
     { label: "Q2", value: "Q2" },
   ]);
   const defaultOption = "Q1";
+
+  const questionList = {
+    "PHIL 180": "What are anti-Realist critiques of realism?",
+    "ARABLANG 12":
+      "What irrigation and agricultural developments did the Ottoman foster?",
+    "CS 147": "What are the differences between cones and rods?",
+    "MATH 51":
+      "What does it mean for a collection of vectors to be orthonormal?",
+  };
 
   useEffect(() => {
     Voice.onSpeechResults = onSpeechResults;
@@ -67,6 +77,7 @@ const Q3 = ({ navigation }) => {
       navigation.push("Q3Next", {
         noteContent: results,
         question: selectedReading,
+        className: className,
       });
     } catch (e) {
       console.error(e);
@@ -78,12 +89,13 @@ const Q3 = ({ navigation }) => {
     console.log(value);
     setValue(value);
     if (value === "Q2") {
-      navigation.push("Q4");
+      navigation.push("Q2", { className });
     }
   };
 
-  const selectedReading =
-    "Q1: This is the first question. What is a primary color?";
+  // const selectedReading =
+  //   "Q1: This is the first question. What is a heuristic evaluation?";
+  const selectedReading = questionList[className] || "";
 
   return (
     <View style={styles.container}>

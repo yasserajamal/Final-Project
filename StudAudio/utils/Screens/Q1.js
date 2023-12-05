@@ -14,7 +14,8 @@ import DropDownPicker from "react-native-dropdown-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
 
-const Q1 = ({ navigation }) => {
+const Q1 = ({ route, navigation }) => {
+  const { className } = route.params;
   const [results, setResults] = useState([]);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Q1");
@@ -23,6 +24,14 @@ const Q1 = ({ navigation }) => {
     { label: "Q2", value: "Q2" },
   ]);
   const defaultOption = "Q1";
+
+  const questionList = {
+    "PHIL 180": "What is Hume's account of causation?",
+    "ARABLANG 12":
+      "What were the most advanced Arab communities in theh 7th century A.D.?",
+    "CS 147": "What is a heuristic evaluation?",
+    "MATH 51": "What is a displacement vector?",
+  };
 
   useEffect(() => {
     Voice.onSpeechResults = onSpeechResults;
@@ -67,6 +76,7 @@ const Q1 = ({ navigation }) => {
       navigation.push("Q1Next", {
         noteContent: results,
         question: selectedReading,
+        className: className,
       });
     } catch (e) {
       console.error(e);
@@ -78,12 +88,16 @@ const Q1 = ({ navigation }) => {
     console.log(value);
     setValue(value);
     if (value === "Q2") {
-      navigation.push("Q2");
+      navigation.push("Q2", { className });
     }
   };
 
-  const selectedReading =
-    "Q1: This is the first question. What is a heuristic evaluation?";
+  // const selectedReading =
+  //   "Q1: This is the first question. What is a heuristic evaluation?";
+  console.log(questionList);
+  console.log(className);
+  console.log(questionList[className]);
+  const selectedReading = questionList[className] || "";
 
   return (
     <View style={styles.container}>

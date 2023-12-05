@@ -15,6 +15,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
 
 const Assignments = ({ route, navigation }) => {
+  const { className } = route.params;
   const [notesArray, setNotesArray] = useState([]);
   const [submittedArray, setSubmittedArray] = useState([]);
   console.log("hi");
@@ -110,7 +111,7 @@ const Assignments = ({ route, navigation }) => {
   //   );
   const renderItem = ({ item }) => (
     <TouchableOpacity
-      onPress={() => navigate(item.noteContent, item.noteName, item.noteDate)}
+      onPress={() => navigate(item.noteContent, item.noteName, className)}
     >
       <ImageBackground
         style={styles.readingButton}
@@ -137,8 +138,8 @@ const Assignments = ({ route, navigation }) => {
     </ImageBackground>
   );
 
-  const navigate = (noteContent, noteName) => {
-    navigation.navigate(noteContent, { noteName });
+  const navigate = (noteContent, noteName, className) => {
+    navigation.navigate(noteContent, { noteName, className });
   };
 
   const share = (noteName) => {

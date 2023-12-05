@@ -15,7 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
 import DropDownPicker from "react-native-dropdown-picker";
 const Q3Next = ({ route, navigation }) => {
-  const { noteContent, question } = route.params;
+  const { noteContent, question, className } = route.params;
   const [results, setResults] = useState([]);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Q1");
@@ -43,7 +43,7 @@ const Q3Next = ({ route, navigation }) => {
       //   noteName: num,
       //   noteContent: noteContent,
       // });
-      navigation.push("Q4");
+      navigation.push("Q4", { className });
 
       // await AsyncStorage.setItem(
       //   `Note ${curCount}`,
@@ -65,7 +65,7 @@ const Q3Next = ({ route, navigation }) => {
     console.log(value);
     setValue(value);
     if (value === "Q2") {
-      navigation.push("Q4");
+      navigation.push("Q4", { className });
     }
   };
 
