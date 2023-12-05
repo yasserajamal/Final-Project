@@ -18,7 +18,6 @@ import {
   Classes,
   Readings,
   Help,
-  UnderConstructionScreen,
   LogoutScreen,
 } from "./utils";
 import { CustomInput } from "./components";
@@ -33,16 +32,16 @@ const Drawer = createDrawerNavigator();
 const setDefaultNotes = async () => {
   try {
     await AsyncStorage.setItem(
-      "Assignment 1",
+      "ASSIGNMENT 1",
       JSON.stringify({ content: "Q1", date: "12/05/23" })
     );
     await AsyncStorage.setItem(
-      "Assignment 2",
+      "ASSIGNMENT 2",
       JSON.stringify({ content: "Q3", date: "12/11/23" })
     );
     await AsyncStorage.setItem(
       "Assignment 0 Submitted",
-      JSON.stringify({ content: "Assignment 0" })
+      JSON.stringify({ content: "ASSIGNMENT 0" })
     );
     await AsyncStorage.removeItem("Assignment 1 Submitted");
     await AsyncStorage.removeItem("Assignment 2 Submitted");

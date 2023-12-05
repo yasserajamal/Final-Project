@@ -9,8 +9,11 @@ import {
   Pressable,
   TextInput,
   TouchableOpacity,
+  Dimensions,
   Alert,
 } from "react-native";
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 import TextToSpeechAssn from "./TextToSpeechAssn";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -42,16 +45,10 @@ const Q2Next = ({ route, navigation }) => {
           content: noteContent,
         })
       );
-      console.log("Note saved successfully!");
-      // navigation.push("NotesOverview", {
-      //   noteName: num,
-      //   noteContent: noteContent,
-      // });
-
-      await AsyncStorage.removeItem("Assignment 1");
+      await AsyncStorage.removeItem("ASSIGNMENT 1");
       await AsyncStorage.setItem(
         "Assignment 1 Submitted",
-        JSON.stringify({ content: "Assignment 1" })
+        JSON.stringify({ content: "ASSIGNMENT 1" })
       );
       navigation.push("Assignments", { className });
     } catch (error) {
@@ -60,14 +57,11 @@ const Q2Next = ({ route, navigation }) => {
   };
   const onRateChange = async (value) => {
     setValue(value);
-    console.log(className);
     if (value === "Q1") {
       navigation.navigate("Q1", { className });
-      //navigation.push("Q1"); //go to q1next
     }
   };
 
-  //setEditName("Note " + num);
   return (
     <View style={styles.container}>
       <View style={styles.both}>
@@ -111,13 +105,6 @@ const Q2Next = ({ route, navigation }) => {
       <ScrollView style={styles.textbox}>
         <Text style={styles.noteContent}>{noteContent}</Text>
       </ScrollView>
-      {/* <View style={styles.buttons}>
-        <Pressable style={styles.new} onPress={() => navigation.goBack()}>
-          <Text style={styles.redo}>{"REDO"}</Text>
-        </Pressable>
-        <Pressable style={styles.new} onPress={this._saveNote}>
-          <Text style={styles.save}>{"SAVE"}</Text>
-        </Pressable> */}
       <View style={styles.buttons}>
         <Pressable style={styles.test2} onPress={() => navigation.goBack()}>
           <Text style={styles.test}>{"Redo"}</Text>
@@ -127,7 +114,6 @@ const Q2Next = ({ route, navigation }) => {
         </Pressable>
       </View>
     </View>
-    //</View>
   );
 };
 
@@ -145,12 +131,12 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     paddingHorizontal: 20,
     paddingVertical: 15,
-    margin: 15, //space username and password
+    margin: 15,
     alignItems: "center",
   },
   both: {
     flexDirection: "row",
-    marginEnd: 80,
+    marginEnd: 70,
     padding: 5,
   },
   TitleText: {
@@ -186,7 +172,7 @@ const styles = StyleSheet.create({
   },
   textbox: {
     backgroundColor: "#ededed",
-    width: 380,
+    width: windowWidth - 20,
     margin: 7,
     borderColor: "black",
     borderRadius: 10,

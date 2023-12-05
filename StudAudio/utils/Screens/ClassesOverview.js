@@ -8,11 +8,13 @@ import {
   FlatList,
   TouchableOpacity,
   ImageBackground,
+  Dimensions,
 } from "react-native";
 
 import { CustomInput, CustomButton } from "../../components";
 import { useNavigation } from "@react-navigation/native";
-
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 const classesList = [
   // here you can add the screens for completing the assignments
   {
@@ -36,7 +38,6 @@ const classesList = [
 ];
 
 const ClassesOverview = ({ route, navigation }) => {
-  // FYI we use route/useEffect to make it look like we have multiple classoverview screens for each class
   const { className } = route.params;
   useEffect(() => {
     navigation.setOptions({ title: className });
@@ -76,21 +77,24 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
+    paddingHorizontal: 10,
     backgroundColor: "white",
-    alignItems: "flex-start",
+    alignItems: "center",
   },
   TitleText: {
-    fontSize: 45,
+    fontSize: windowWidth / 9.5,
     fontWeight: "bold",
     fontFamily: "Georgia",
     marginHorizontal: 15,
     marginVertical: 10,
+    textAlign: "center",
     position: "relative",
+    justifyContent: "center",
   },
   classButton: {
     marginVertical: 10,
-    height: 120,
-    width: 430,
+    height: windowHeight / 7.1,
+    width: windowWidth - 10,
   },
   overlay: {
     backgroundColor: "#00000080",

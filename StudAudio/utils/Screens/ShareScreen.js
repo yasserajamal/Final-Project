@@ -14,36 +14,8 @@ import {
   Alert,
 } from "react-native";
 
-import Dialog, { DialogContent } from "react-native-popup-dialog";
-import { CustomInput, CustomButton } from "../../components";
-import { useNavigation } from "@react-navigation/native";
-
-const classesList = [
-  // here you can add the screens for completing the assignments
-  {
-    id: "1",
-    title: "ASSIGNMENTS",
-    screenName: "Assignments",
-    backgroundImage: require("../../assets/Themes/Assignments.jpg"),
-  },
-  {
-    id: "2",
-    title: "NOTES",
-    screenName: "NotesOverview",
-    backgroundImage: require("../../assets/Themes/notessss.png"),
-  },
-  {
-    id: "3",
-    title: "READINGS",
-    screenName: "READINGS",
-    backgroundImage: require("../../assets/Themes/myreadings.jpeg"),
-  },
-];
-
 const ShareScreen = ({ route, navigation }) => {
-  // FYI we use route/useEffect to make it look like we have multiple classoverview screens for each class
   const { share } = route.params;
-  console.log(share);
   const [text, onChangeText] = React.useState("");
 
   const createAlert = () =>

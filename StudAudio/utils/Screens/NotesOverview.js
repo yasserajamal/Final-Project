@@ -7,17 +7,17 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
-  Pressable,
+  Dimensions,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FontAwesome } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 const NotesOverview = ({ route, navigation }) => {
   const [notesArray, setNotesArray] = useState([]);
-  console.log("hi");
   useEffect(() => {
-    console.log("ne");
     const loadData = async () => {
       await load();
     };
@@ -45,8 +45,8 @@ const NotesOverview = ({ route, navigation }) => {
             key !== "Assignment 0 Submitted" &&
             key !== "Assignment 1 Submitted" &&
             key !== "Assignment 2 Submitted" &&
-            key !== "Assignment 1" &&
-            key !== "Assignment 2" &&
+            key !== "ASSIGNMENT 1" &&
+            key !== "ASSIGNMENT 2" &&
             key !== "Q1" &&
             key !== "Q2" &&
             key !== "Q3" &&
@@ -59,14 +59,12 @@ const NotesOverview = ({ route, navigation }) => {
         }));
 
       setNotesArray(parsedNotes);
-      console.log("User Notes:", parsedNotes);
     } catch (error) {
       console.error("Error loading notes:", error);
     }
   };
   const deleteNote = async (noteName) => {
     try {
-      console.log(noteName);
       await AsyncStorage.removeItem(noteName);
       load();
     } catch (error) {
@@ -100,13 +98,12 @@ const NotesOverview = ({ route, navigation }) => {
     navigation.navigate("ShareNote", { noteName });
   };
 
-  //   const selectednote = notesList.find((item) => item.screenName === noteName);
-  //   console.log(selectednote);
   return (
     <View style={styles.container}>
+      <Text style={styles.TitleFont}>NOTES</Text>
       <TouchableOpacity onPress={() => navigation.navigate("Notes")}>
         <View style={styles.overlay}>
-          <Text style={styles.TitleText}>New Note</Text>
+          <Text style={styles.TitleText}>NEW NOTE</Text>
           <FontAwesome name="plus" size={24} color="black" />
         </View>
       </TouchableOpacity>
@@ -128,16 +125,17 @@ const styles = StyleSheet.create({
     padding: 10,
     justifyContent: "center",
   },
-  textbox: {
-    width: 350,
-    margin: 7,
-    borderColor: "black",
-    borderRadius: 10,
-    borderWidth: 2,
-  },
   text: {
     fontSize: 18,
     fontFamily: "Arial",
+    position: "relative",
+  },
+  TitleFont: {
+    fontSize: windowWidth / 9.5,
+    fontWeight: "bold",
+    fontFamily: "Georgia",
+    marginHorizontal: 15,
+    marginVertical: 10,
     position: "relative",
   },
   TitleText: {
@@ -159,7 +157,7 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     borderRadius: 8,
     padding: 10,
-    width: 360,
+    width: windowWidth - 20,
     marginBottom: 16,
     alignContent: "center",
   },

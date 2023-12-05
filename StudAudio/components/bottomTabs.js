@@ -6,7 +6,6 @@ import { View, Text, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import {
   Classes,
-  UnderConstruction,
   Help,
   ViewConnectionsScreen,
   Connect,

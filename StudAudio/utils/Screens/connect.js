@@ -6,8 +6,11 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  Dimensions,
 } from "react-native";
 import { useState } from "react";
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 import { useNavigation } from "@react-navigation/native";
 import Swiper from "react-native-deck-swiper";
 
@@ -36,7 +39,7 @@ const Data = [
   {
     id: "4",
     name: "Rica",
-    bio: "I'm passionate about envionrmental sceince",
+    bio: "I'm passionate about environmental science",
     info: "Also taking: PHIL 180",
     image: require("../../assets/Connect/Rica.jpg"),
   },
@@ -64,9 +67,6 @@ const Connect = () => {
   const ViewConnections = () => {
     navigation.navigate("ViewConnectionsScreen");
   };
-  const SwippedSkip = () => {
-    return; // Stretch goal implement Tinder swipping effects for both swipping to connect and skipping
-  };
 
   const SwippedConnect = (cardIndex) => {
     Alert.alert(
@@ -93,16 +93,17 @@ const Connect = () => {
           for new connections
         </Text>
       )}
-      <Swiper
-        cards={Data}
-        renderCard={(card) => <Card card={card} />}
-        onSwipedLeft={SwippedSkip}
-        onSwipedRight={SwippedConnect}
-        onSwipedAll={onSwipedAllCards}
-        cardIndex={0}
-        backgroundColor={"transparent"}
-        stackSize={3}
-      />
+      <View style={styles.swiperContainer}>
+        <Swiper
+          cards={Data}
+          renderCard={(card) => <Card card={card} />}
+          onSwipedRight={SwippedConnect}
+          onSwipedAll={onSwipedAllCards}
+          cardIndex={0}
+          backgroundColor={"transparent"}
+          stackSize={3}
+        />
+      </View>
       <TouchableOpacity
         onPress={ViewConnections}
         style={styles.viewConnectionsButton}
@@ -114,6 +115,12 @@ const Connect = () => {
 };
 
 const styles = StyleSheet.create({
+  swiperContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: -30,
+  },
   container: {
     flex: 1,
     width: "100%",
@@ -132,7 +139,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 5,
     position: "absolute",
-    bottom: 70,
+    bottom: 20,
     left: 30,
     right: 30,
     alignItems: "center",
@@ -159,9 +166,8 @@ const styles = StyleSheet.create({
     color: "grey",
   },
   card: {
-    width: 400,
-    height: 470,
-    marginVertical: 40,
+    width: windowWidth - 30,
+    marginVertical: 0,
     marginHorizontal: -5,
     borderRadius: 4,
     borderWidth: 1,
@@ -171,7 +177,7 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     width: "100%",
-    height: 380,
+    height: windowWidth,
     marginBottom: 80,
   },
   cardTitle: {

@@ -7,12 +7,14 @@ import {
   ScrollView,
   Pressable,
   StyleSheet,
+  Dimensions,
 } from "react-native";
 import TextToSpeechAssn from "./TextToSpeechAssn";
 import Voice, { SpeechResultsEvent } from "@react-native-voice/voice";
 import DropDownPicker from "react-native-dropdown-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 const Q4 = ({ route, navigation }) => {
   const { className } = route.params;
   const [results, setResults] = useState([]);
@@ -42,7 +44,6 @@ const Q4 = ({ route, navigation }) => {
   }, []);
 
   const onSpeechResults = (e: SpeechResultsEvent) => {
-    console.log("onSpeechResults: ", e);
     setResults(e.value);
   };
 
@@ -82,12 +83,8 @@ const Q4 = ({ route, navigation }) => {
     setValue(value);
     if (value === "Q1") {
       navigation.goBack({ className });
-      //navigation.push("Q1"); //go to q1next
     }
   };
-
-  // const selectedReading =
-  //   "Q2: This is the second question. What is a Fitt's Law?";
   const selectedReading = questionList[className] || "";
 
   return (
@@ -115,7 +112,6 @@ const Q4 = ({ route, navigation }) => {
             zIndex: 9999,
           }}
           dropDownContainerStyle={{
-            //marginTop: -140,
             marginLeft: -70,
             marginTop: -50,
             zIndex: 9999,
@@ -170,7 +166,7 @@ const styles = StyleSheet.create({
   },
   both: {
     flexDirection: "row",
-    marginEnd: 80,
+    marginEnd: 70,
     padding: 5,
   },
   text: {
@@ -197,7 +193,7 @@ const styles = StyleSheet.create({
   },
   textbox: {
     backgroundColor: "#ededed",
-    width: 380,
+    width: windowWidth - 20,
     margin: 7,
     borderColor: "black",
     borderRadius: 10,

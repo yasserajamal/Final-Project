@@ -6,8 +6,11 @@ import {
   FlatList,
   TouchableOpacity,
   ImageBackground,
+  Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 const classesList = [
   {
@@ -20,7 +23,7 @@ const classesList = [
   {
     id: "2",
     title: "CS 147",
-    screenName: "UnderconstructionScreen",
+    screenName: "CS 147",
     backgroundImage: require("../../assets/Themes/stanford-sunset.jpeg"),
     readings: ["two", "three"],
   },
@@ -78,22 +81,25 @@ const Classes = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingHorizontal: 10,
     width: "100%",
     backgroundColor: "white",
-    alignItems: "flex-start",
+    alignItems: "center",
   },
   TitleText: {
-    fontSize: 45,
+    fontSize: windowWidth / 9.5,
     fontWeight: "bold",
     fontFamily: "Georgia",
     marginHorizontal: 15,
     marginVertical: 10,
+    textAlign: "center",
     position: "relative",
+    justifyContent: "center",
   },
   classButton: {
     marginVertical: 10,
-    height: 120,
-    width: 430,
+    height: windowHeight / 7.1,
+    width: windowWidth - 10,
   },
   overlay: {
     backgroundColor: "#00000080",

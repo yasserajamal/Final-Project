@@ -7,7 +7,10 @@ import {
   ScrollView,
   Pressable,
   StyleSheet,
+  Dimensions,
 } from "react-native";
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 import TextToSpeechAssn from "./TextToSpeechAssn";
 import Voice, { SpeechResultsEvent } from "@react-native-voice/voice";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -92,8 +95,6 @@ const Q1 = ({ route, navigation }) => {
     }
   };
 
-  // const selectedReading =
-  //   "Q1: This is the first question. What is a heuristic evaluation?";
   console.log(questionList);
   console.log(className);
   console.log(questionList[className]);
@@ -124,7 +125,6 @@ const Q1 = ({ route, navigation }) => {
             zIndex: 9999,
           }}
           dropDownContainerStyle={{
-            //marginTop: -140,
             marginLeft: -70,
             marginTop: -50,
             zIndex: 9999,
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
   },
   textbox: {
     backgroundColor: "#ededed",
-    width: 380,
+    width: windowWidth - 20,
     margin: 7,
     borderColor: "black",
     borderRadius: 10,
@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
   },
   both: {
     flexDirection: "row",
-    marginEnd: 80,
+    marginEnd: 70,
     padding: 5,
   },
   container: {

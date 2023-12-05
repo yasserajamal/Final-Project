@@ -8,19 +8,19 @@ import {
   FlatList,
   TouchableOpacity,
   Pressable,
+  Dimensions,
   ImageBackground,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { FontAwesome } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 const Assignments = ({ route, navigation }) => {
   const { className } = route.params;
   const [notesArray, setNotesArray] = useState([]);
   const [submittedArray, setSubmittedArray] = useState([]);
-  console.log("hi");
   useEffect(() => {
-    console.log("ne");
     const loadData = async () => {
       await load();
       await loadSubmitted();
@@ -44,7 +44,7 @@ const Assignments = ({ route, navigation }) => {
       const allNotes = await AsyncStorage.multiGet(allKeys);
 
       const parsedNotes = allNotes
-        .filter(([key]) => key === "Assignment 1" || key === "Assignment 2")
+        .filter(([key]) => key === "ASSIGNMENT 1" || key === "ASSIGNMENT 2")
         .sort()
         .map(([key, value]) => ({
           noteName: key,
@@ -53,7 +53,6 @@ const Assignments = ({ route, navigation }) => {
         }));
 
       setNotesArray(parsedNotes);
-      console.log("User Notes:", parsedNotes);
     } catch (error) {
       console.error("Error loading notes:", error);
     }
@@ -77,50 +76,31 @@ const Assignments = ({ route, navigation }) => {
         }));
 
       setSubmittedArray(parsedNotes);
-      console.log("User Notes:", parsedNotes);
     } catch (error) {
       console.error("Error loading notes:", error);
     }
   };
   const deleteNote = async (noteName) => {
     try {
-      console.log(noteName);
       await AsyncStorage.removeItem(noteName);
       load();
     } catch (error) {
       console.error("Error loading notes:", error);
     }
   };
-
-  //   const renderItem = ({ item }) => (
-  //     <TouchableOpacity onPress={() => navigate(item.noteName)}>
-  //       <View style={styles.overlay}>
-  //         <Text style={styles.text}>{item.noteName}</Text>
-  //         <View style={styles.close}>
-  //           <FontAwesome
-  //             name="trash"
-  //             size={24}
-  //             color="black"
-  //             onPress={() => deleteNote(item.noteName)}
-  //             style={{ marginRight: 15 }}
-  //           />
-  //           <FontAwesome name="share" size={24} color="black" onPress={share} />
-  //         </View>
-  //       </View>
-  //     </TouchableOpacity>
-  //   );
   const renderItem = ({ item }) => (
     <TouchableOpacity
       onPress={() => navigate(item.noteContent, item.noteName, className)}
     >
       <ImageBackground
+        source={require("../../assets/Themes/Assignments.jpg")}
         style={styles.readingButton}
         imageStyle={styles.backgroundImage}
       >
         <View style={styles.overlay}>
           <Text style={styles.readingButtonText}>{item.noteName}</Text>
           <Text style={styles.readingButtonTextSmall}>
-            {"Due: " + item.noteDate}
+            {"DUE: " + item.noteDate}
           </Text>
         </View>
       </ImageBackground>
@@ -129,6 +109,7 @@ const Assignments = ({ route, navigation }) => {
 
   const renderItem2 = ({ item }) => (
     <ImageBackground
+      source={require("../../assets/Themes/myreadings.jpeg")}
       style={styles.readingButton}
       imageStyle={styles.backgroundImage}
     >
@@ -142,22 +123,16 @@ const Assignments = ({ route, navigation }) => {
     navigation.navigate(noteContent, { noteName, className });
   };
 
-  const share = (noteName) => {
-    navigation.navigate("ShareNote", { noteName });
-  };
-
-  //   const selectednote = notesList.find((item) => item.screenName === noteName);
-  //   console.log(selectednote);
   return (
     <View style={styles.container}>
       <Text style={styles.Title}>ASSIGNMENTS</Text>
-      <Text style={styles.TitleText}>Due Soon</Text>
+      <Text style={styles.TitleText}>DUE SOON</Text>
       <FlatList
         data={notesArray}
         renderItem={renderItem}
         keyExtractor={(item) => item.noteName}
       />
-      <Text style={styles.TitleText}>Submitted</Text>
+      <Text style={styles.TitleText}>SUBMITTED</Text>
       <FlatList
         data={submittedArray}
         renderItem={renderItem2}
@@ -173,31 +148,19 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "white",
     alignItems: "center",
-    padding: 10,
+    paddingHorizontal: 10,
     justifyContent: "center",
   },
   Title: {
-    fontSize: 45,
+    fontSize: windowWidth / 9.5,
     fontWeight: "bold",
     fontFamily: "Georgia",
     marginHorizontal: 15,
     marginVertical: 10,
     position: "relative",
   },
-  textbox: {
-    width: 350,
-    margin: 7,
-    borderColor: "black",
-    borderRadius: 10,
-    borderWidth: 2,
-  },
-  text: {
-    fontSize: 18,
-    fontFamily: "Arial",
-    position: "relative",
-  },
   TitleText: {
-    fontSize: 30,
+    fontSize: windowWidth / 15,
     fontWeight: "bold",
     fontFamily: "Georgia",
     textAlign: "center",
@@ -225,8 +188,8 @@ const styles = StyleSheet.create({
   },
   readingButton: {
     marginVertical: 10,
-    height: 120,
-    width: 430,
+    height: windowHeight / 7.1,
+    width: windowWidth - 10,
   },
   overlay: {
     backgroundColor: "#00000080",
@@ -234,14 +197,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   readingButtonText: {
-    fontSize: 32,
+    fontSize: windowWidth / 12,
     color: "white",
     textAlign: "center",
     fontFamily: "Arial",
   },
   readingButtonTextSmall: {
     paddingVertical: 5,
-    fontSize: 22,
+    fontSize: windowWidth / 15,
     color: "white",
     textAlign: "center",
     fontFamily: "Arial",

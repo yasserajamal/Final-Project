@@ -1,21 +1,18 @@
-// The following file contains the screen that shows all the available actions within a note
-
 import React, { useState, useEffect } from "react";
 import {
   View,
-  Text,
+  Dimensions,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
   TextInput,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { FontAwesome } from "@expo/vector-icons";
-
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 const NotesText = ({ route }) => {
   const { noteName } = route.params;
-  const [noteContent, setNoteContent] = useState("");
   const [editName, setEditName] = useState(noteName);
+  const [editContent, setEditContent] = useState("");
 
   useEffect(() => {
     loadNoteContent();
@@ -27,7 +24,7 @@ const NotesText = ({ route }) => {
       const parsedNote = JSON.parse(noteData);
 
       if (parsedNote) {
-        setNoteContent(parsedNote.content);
+        setEditContent(parsedNote.content);
       }
     } catch (error) {
       console.error("Error loading note content:", error);
@@ -36,28 +33,22 @@ const NotesText = ({ route }) => {
 
   const editNoteName = async () => {
     try {
-      console.log(editName);
       await AsyncStorage.removeItem(noteName);
       setEditName(editName);
-      // await AsyncStorage.setItem(
-      //   editName,
-      //   JSON.stringify({ content: noteContent })
-      // );
       await AsyncStorage.setItem(
         editName,
         JSON.stringify({
           noteNum: editName,
-          content: noteContent,
+          content: editContent,
         })
       );
     } catch (error) {
-      console.error("Error editing note name:", error);
+      console.error("Error editing note:", error);
     }
   };
 
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.noteName}>{noteName}</Text> */}
       <TextInput
         style={styles.noteName}
         value={editName}
@@ -65,7 +56,12 @@ const NotesText = ({ route }) => {
         onBlur={editNoteName}
       />
       <ScrollView style={styles.textbox}>
-        <Text style={styles.noteContent}>{noteContent}</Text>
+        <TextInput
+          style={styles.noteContent}
+          value={editContent.toString()}
+          onChangeText={(text) => setEditContent(text)}
+          onBlur={editNoteName}
+        />
       </ScrollView>
     </View>
   );
@@ -79,21 +75,12 @@ const styles = StyleSheet.create({
   },
   textbox: {
     backgroundColor: "#ededed",
-    width: 380,
-    margin: 7,
+    width: windowWidth / 1.1,
+    margin: 3,
     borderColor: "black",
     borderRadius: 10,
     borderWidth: 2,
     padding: 5,
-  },
-  notetext: {
-    fontSize: 20,
-    fontFamily: "Arial",
-    textAlign: "center",
-    marginHorizontal: 15,
-    marginVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "black",
   },
   noteName: {
     fontSize: 30,

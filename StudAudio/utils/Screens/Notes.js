@@ -5,11 +5,9 @@ import {
   View,
   Image,
   TouchableHighlight,
-  Button,
   Pressable,
   ScrollView,
 } from "react-native";
-import { CustomInput, CustomButton } from "../../components";
 import Voice, { SpeechResultsEvent } from "@react-native-voice/voice";
 import { withNavigation } from "@react-navigation/compat";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -17,13 +15,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 type Props = {};
 type State = {
   results: string[],
-  //noteCounter: number,
 };
 
 class Notes extends Component<Props, State> {
   state = {
     results: [],
-    //noteCounter: 1,
   };
 
   constructor(props: Props) {
@@ -36,7 +32,6 @@ class Notes extends Component<Props, State> {
   }
 
   onSpeechResults = (e: SpeechResultsEvent) => {
-    console.log("onSpeechResults: ", e);
     this.setState({
       results: e.value,
     });
@@ -66,7 +61,6 @@ class Notes extends Component<Props, State> {
   _destroyRecognizer = async () => {
     try {
       await Voice.destroy();
-      //await this._saveNote(this.state.noteCounter, this.state.results);
       this.props.navigation.push("NotesNext", {
         noteContent: this.state.results,
       });
@@ -94,8 +88,6 @@ class Notes extends Component<Props, State> {
       this.setState((prevState) => ({
         noteCounter: prevState.noteCounter + 1,
       }));
-
-      console.log("Note saved successfully!");
     } catch (error) {
       console.error("Error saving note:", error);
     }

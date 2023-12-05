@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Button, Pressable } from "react-native";
 import * as Speech from "expo-speech";
-import Slider from "@react-native-community/slider";
 import { FontAwesome } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -17,20 +16,11 @@ const TextToSpeech = ({ passedData }) => {
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
     { label: "0.5x", value: 0.5 },
-    //{ label: "0.75x", value: 0.75 },
     { label: "1x", value: 1 },
     { label: "1.5x", value: 1.5 },
-    //{ label: "2x", value: 2 },
   ]);
 
-  const options = [
-    { label: "Option 1", value: "option1" },
-    { label: "Option 2", value: "option2" },
-  ];
-
   const defaultOption = 1;
-
-  //console.log(passedData);
   const speak = () => {
     Speech.stop();
     setIsSpeaking(true);
@@ -40,25 +30,21 @@ const TextToSpeech = ({ passedData }) => {
       language: "en-GB",
       voice: "com.apple.ttsbundle.Daniel-compact",
       pitch: pitch,
-      rate: value,
-      onDone: () => {
-        console.log("onDone callback executed");
-        setPlay(false);
-        setIsSpeaking(false);
-        setCurrentImage("play");
-      },
+      rate: rate,
     });
   };
-  // temp play buttin for first Pressable, hidden after
   useFocusEffect(
     React.useCallback(() => {
-      // This function will be called when the component gains focus
       return () => {
-        // This function will be called when the component loses focus
         Speech.stop();
       };
     }, [])
   );
+  useEffect(() => {
+    if (firstPlay) {
+      speak();
+    }
+  }, [rate]);
 
   const toggleSpeech = () => {
     if (!firstPlay) {
@@ -88,8 +74,6 @@ const TextToSpeech = ({ passedData }) => {
 
   const onRateChange = (value) => {
     setRate(value);
-    console.log(value);
-    console.log(rate);
     speak();
   };
 
@@ -97,30 +81,8 @@ const TextToSpeech = ({ passedData }) => {
     <View style={styles.container}>
       <Button color="black" style="button" title="Listen" onPress={speak} />
       <View style={styles.sliders}>
-        <View style={styles.group}>
-          {/* <Text style={styles.text}> Pitch </Text>
-          <Slider
-            style={{ width: 200, height: 40 }}
-            minimumValue={0}
-            maximumValue={2}
-            minimumTrackTintColor="#FFFFFF"
-            maximumTrackTintColor="#000000"
-            onValueChange={onPitchChange}
-            value={pitch}
-          /> */}
-        </View>
-        <View style={styles.group}>
-          {/* <Text style={styles.text}>Speed</Text>
-          <Slider
-            style={{ width: 200, height: 40 }}
-            minimumValue={0}
-            maximumValue={2}
-            minimumTrackTintColor="#FFFFFF"
-            maximumTrackTintColor="#000000"
-            onValueChange={onRateChange}
-            value={rate}
-          /> */}
-        </View>
+        <View style={styles.group}></View>
+        <View style={styles.group}></View>
       </View>
       <View style={styles.buttons}>
         {currentImage === "play" && (
@@ -155,10 +117,6 @@ const TextToSpeech = ({ passedData }) => {
               position: "relative",
               zIndex: 999,
             }}
-            // onSelectItem={(item) => {
-            //   setRate(item.value);
-            //   onRateChange(item.value);
-            // }}
             dropDownContainerStyle={{
               marginTop: -140,
             }}
@@ -186,10 +144,6 @@ const styles = StyleSheet.create({
   group: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  slider: {
-    width: 200,
-    height: 40,
   },
   drop: {
     width: 100,

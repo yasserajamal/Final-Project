@@ -5,6 +5,7 @@ import {
   Image,
   StyleSheet,
   useWindowDimensions,
+  Dimensions,
   Pressable,
   ActivityIndicator,
 } from "react-native";
@@ -13,7 +14,8 @@ import { CustomInput, CustomButton } from "../../../components";
 import { useNavigation } from "@react-navigation/native";
 import { FireBaseAuth } from "../../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 const SignInScreen = ({ route }) => {
   const [Email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +30,6 @@ const SignInScreen = ({ route }) => {
         Email,
         password
       );
-      console.log(response);
       setLoading(false);
       setIsAuthenticated(true); // set to false if authentication fails
     } catch (error) {
@@ -70,7 +71,6 @@ const SignInScreen = ({ route }) => {
           <Pressable onPress={ifforgotPressed} style={styles.pressableText}>
             <Text style={styles.forgotText}>{"\n"}Forgot password?</Text>
           </Pressable>
-          {/* <Text style={styles.text}>{"\n"}Don't have an account yet?</Text> */}
           <CustomButton
             text="Sign up"
             onPress={ifSignUpPressed}
@@ -83,33 +83,28 @@ const SignInScreen = ({ route }) => {
     </View>
   );
 };
-// canvas button :  <CustomButton text= "Sign In With Canvas" onPress = {ifSignInCanvas} type= "canvas" fgcolor="white" bgcolor = "#f70d1a"/>
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
-    padding: 30,
-    // paddingVertical: 100,
-    flexDirection: "column",
-    // marginVertical: 50,
+    padding: ((windowWidth + windowHeight) / 2) * 0.05,
   },
   welcomeText: {
-    fontSize: 70,
+    fontSize: ((windowWidth + windowHeight) / 2) * 0.1, // Adjust the factor as needed
     fontWeight: "bold",
     fontFamily: "Georgia",
-    marginBottom: 20,
+    marginBottom: ((windowWidth + windowHeight) / 2) * 0.02,
   },
   text: {
-    fontSize: 15,
+    fontSize: windowWidth * 0.03,
     fontWeight: "light",
     fontFamily: "Georgia",
   },
   forgotText: {
-    paddingHorizontal: 2,
+    paddingHorizontal: windowWidth * 0.02,
     fontSize: 17,
-    fontWeight: "light",
     fontWeight: "bold",
     fontFamily: "Georgia",
   },
