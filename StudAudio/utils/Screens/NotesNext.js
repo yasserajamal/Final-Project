@@ -8,36 +8,26 @@ import {
   ScrollView,
   Pressable,
   TextInput,
-  TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 const NotesNext = ({ route, navigation }) => {
   const { noteContent } = route.params;
   const [num, setNum] = useState(1);
   const [editName, setEditName] = useState("Note " + num);
+  const [editContent, setEditContent] = useState(noteContent);
   useEffect(() => {
     const loadCount = async () => {
       const storedCount = await AsyncStorage.getItem("noteCounter");
       const count = storedCount ? parseInt(storedCount) : 1;
       setNum(count);
       setEditName("Note " + count);
+      setEditContent(noteContent);
     };
     loadCount();
   }, []);
-  const editNoteName = async () => {
-    try {
-      console.log(editName);
-      //await AsyncStorage.removeItem(noteName);
-      setEditName(editName);
-      await AsyncStorage.setItem(
-        editName,
-        JSON.stringify({ content: noteContent })
-      );
-    } catch (error) {
-      console.error("Error editing note name:", error);
-    }
-  };
 
   _saveNote = async () => {
     try {
@@ -45,75 +35,50 @@ const NotesNext = ({ route, navigation }) => {
       const curCount = storedCount ? parseInt(storedCount) : 1;
       await AsyncStorage.setItem("noteCounter", `${curCount + 1}`);
 
-      console.log(editName);
-      console.log(`Note ${curCount}`);
-      console.log(`Note ${curCount}` == editName);
       if (`Note ${curCount}` != editName) {
         await AsyncStorage.setItem(
           editName,
           JSON.stringify({
             noteNum: editName,
-            content: noteContent,
+            content: editContent,
           })
         );
-        console.log("Note saved successfully!");
         navigation.push("NotesOverview", {
           noteName: editName,
-          noteContent: noteContent,
+          noteContent: editContent,
         });
       } else {
         await AsyncStorage.setItem(
           `Note ${curCount}`,
           JSON.stringify({
             noteNum: curCount,
-            content: noteContent,
+            content: editContent,
           })
         );
-        console.log("Note saved successfully!");
         navigation.push("NotesOverview", {
           noteName: num,
-          noteContent: noteContent,
+          noteContent: editContent,
         });
       }
-
-      // await AsyncStorage.setItem(
-      //   `Note ${curCount}`,
-      //   JSON.stringify({
-      //     noteNum: curCount,
-      //     content: noteContent,
-      //   })
-      // );
-      // console.log("Note saved successfully!");
-      // navigation.push("NotesOverview", {
-      //   noteName: num,
-      //   noteContent: noteContent,
-      // });
     } catch (error) {
       console.error("Error saving note:", error);
     }
   };
 
-  //setEditName("Note " + num);
-  console.log(num);
-  console.log(editName);
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.welcome}>{"Note " + num}</Text> */}
       <TextInput
         style={styles.welcome}
         onChangeText={setEditName}
         value={editName}
       />
       <ScrollView style={styles.textbox}>
-        <Text style={styles.noteContent}>{noteContent}</Text>
+        <TextInput
+          style={styles.noteContent}
+          onChangeText={setEditContent}
+          value={editContent.toString()}
+        />
       </ScrollView>
-      {/* <View style={styles.buttons}>
-        <Pressable style={styles.new} onPress={() => navigation.goBack()}>
-          <Text style={styles.redo}>{"REDO"}</Text>
-        </Pressable>
-        <Pressable style={styles.new} onPress={this._saveNote}>
-          <Text style={styles.save}>{"SAVE"}</Text>
-        </Pressable> */}
       <View style={styles.buttons}>
         <Pressable style={styles.test2} onPress={() => navigation.goBack()}>
           <Text style={styles.test}>{"Redo"}</Text>
@@ -123,7 +88,6 @@ const NotesNext = ({ route, navigation }) => {
         </Pressable>
       </View>
     </View>
-    //</View>
   );
 };
 
@@ -141,7 +105,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     paddingHorizontal: 20,
     paddingVertical: 15,
-    margin: 15, //space username and password
+    margin: 15,
     alignItems: "center",
   },
   test: {
@@ -149,15 +113,6 @@ const styles = StyleSheet.create({
     fontFamily: "Georgia",
     fontWeight: "bold",
     fontSize: 17,
-  },
-  textbox: {
-    backgroundColor: "#ededed",
-    width: 350,
-    margin: 7,
-    borderColor: "black",
-    borderRadius: 10,
-    borderWidth: 2,
-    padding: 5,
   },
   noteName: {
     fontSize: 24,
@@ -169,8 +124,8 @@ const styles = StyleSheet.create({
   },
   textbox: {
     backgroundColor: "#ededed",
-    width: 350,
-    margin: 7,
+    width: windowWidth / 1.1,
+    margin: 3,
     borderColor: "black",
     borderRadius: 10,
     borderWidth: 2,
@@ -189,16 +144,6 @@ const styles = StyleSheet.create({
     color: "black",
     fontFamily: "Arial",
     fontSize: 20,
-  },
-  new: {
-    padding: 10,
-    backgroundColor: "#ededed",
-    margin: 15,
-    width: 108,
-    alignItems: "center",
-    borderRadius: 10,
-    borderColor: "black",
-    borderWidth: 2,
   },
   buttons: {
     justifyContent: "space-around",

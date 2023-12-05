@@ -7,13 +7,15 @@ import {
   ScrollView,
   Pressable,
   StyleSheet,
+  Dimensions,
 } from "react-native";
 import TextToSpeechAssn from "./TextToSpeechAssn";
 import Voice, { SpeechResultsEvent } from "@react-native-voice/voice";
 import DropDownPicker from "react-native-dropdown-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
-
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 const Q3 = ({ route, navigation }) => {
   const { className } = route.params;
   const [results, setResults] = useState([]);
@@ -49,7 +51,6 @@ const Q3 = ({ route, navigation }) => {
   );
 
   const onSpeechResults = (e: SpeechResultsEvent) => {
-    console.log("onSpeechResults: ", e);
     setResults(e.value);
   };
 
@@ -86,15 +87,12 @@ const Q3 = ({ route, navigation }) => {
   };
 
   const onRateChange = async (value) => {
-    console.log(value);
     setValue(value);
     if (value === "Q2") {
       navigation.push("Q2", { className });
     }
   };
 
-  // const selectedReading =
-  //   "Q1: This is the first question. What is a heuristic evaluation?";
   const selectedReading = questionList[className] || "";
 
   return (
@@ -199,7 +197,7 @@ const styles = StyleSheet.create({
   },
   textbox: {
     backgroundColor: "#ededed",
-    width: 380,
+    width: windowWidth - 20,
     margin: 7,
     borderColor: "black",
     borderRadius: 10,
@@ -253,7 +251,7 @@ const styles = StyleSheet.create({
   },
   both: {
     flexDirection: "row",
-    marginEnd: 80,
+    marginEnd: 70,
     padding: 5,
   },
   container: {

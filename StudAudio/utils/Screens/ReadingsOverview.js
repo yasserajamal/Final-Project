@@ -1,8 +1,9 @@
 // The following file contains the screen that shows all the available actions within a reading
 
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Dimensions, ScrollView } from "react-native";
 import TextToSpeech from "./TextToSpeech";
+const windowWidth = Dimensions.get("window").width;
 
 const readingsList = [
   {
@@ -39,7 +40,7 @@ const readingsList = [
     id: "6",
     title:
       "Chapter 13 introduces the fundamental concept of linear function Rn → Rm and related notion of matrix, and describes a general object that deserves to be called the (total) derivative of a (typically nonlinear) function f : Rn → Rm. This (total) derivative is called the derivative matrix. The reasons why it is the right general concept and what it is good for will be the focus of the rest of Part III. In Chapter 14 we introduce linear transformations as a geometric way to think about matrices. The visual idea of composing two linear transformations (i.e., applying one and then another, such as rotating R2 around the origin by an angle and then shearing it in some direction) is calculated using a new algebraic idea: multiplying matrices. In the context of rigid motions in 3-dimensional space (relevant in robotics, video games, and computer vision) this yields a rich array of examples, applications, and insights. An important feature of matrices is that the product AB of matrices A and B depends on the order of multiplication; i.e., typically AB 6= BA. This phenomenon is studied further in Chapter 15, where we also introduce matrix addition and provide a list of familiar-looking properties of addition and multiplication for matrices (explaining why matrix multiplication really deserves to be called multiplication).",
-    screenName: "LINEAR TRANSFORMATIONS",
+    screenName: "LINEAR TRANSFORMATION",
   },
   {
     id: "7",
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
     zindex: 5,
   },
   textbox: {
-    width: 350,
+    width: windowWidth - 20,
     margin: 7,
     borderColor: "black",
     borderRadius: 10,

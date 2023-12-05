@@ -15,9 +15,7 @@ import Q4Next from "./Screens/Q4Next";
 import ShareNote from "./Screens/ShareNote";
 import Notes from "./Screens/Notes";
 import Help from "./Screens/helpScreen";
-import UnderConstructionScreen from "./Screens/UnderConstruction";
 import LogoutScreen from "./Screens/LogoutScreen";
-import UnderConstructionScreen2 from "./Screens/underConstruction2";
 import ClassesOverview from "./Screens/ClassesOverview";
 import ShareScreen from "./Screens/ShareScreen";
 import Connect from "./Screens/connect";
@@ -40,9 +38,7 @@ export {
   Q4Next,
   Notes,
   Help,
-  UnderConstructionScreen,
   LogoutScreen,
-  UnderConstructionScreen2,
   ClassesOverview,
   Connect,
   Readings,

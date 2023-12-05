@@ -9,11 +9,14 @@ import {
   Pressable,
   TextInput,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import TextToSpeechAssn from "./TextToSpeechAssn";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
 import DropDownPicker from "react-native-dropdown-picker";
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 const Q1Next = ({ route, navigation }) => {
   const { noteContent, question, className } = route.params;
   const [results, setResults] = useState([]);
@@ -39,38 +42,18 @@ const Q1Next = ({ route, navigation }) => {
           content: noteContent,
         })
       );
-      console.log("Note saved successfully!");
-      // navigation.push("NotesOverview", {
-      //   noteName: num,
-      //   noteContent: noteContent,
-      // });
       navigation.push("Q2", { className });
-
-      // await AsyncStorage.setItem(
-      //   `Note ${curCount}`,
-      //   JSON.stringify({
-      //     noteNum: curCount,
-      //     content: noteContent,
-      //   })
-      // );
-      // console.log("Note saved successfully!");
-      // navigation.push("NotesOverview", {
-      //   noteName: num,
-      //   noteContent: noteContent,
-      // });
     } catch (error) {
       console.error("Error saving note:", error);
     }
   };
   const onRateChange = async (value) => {
-    console.log(value);
     setValue(value);
     if (value === "Q2") {
       navigation.push("Q2", { className });
     }
   };
 
-  //setEditName("Note " + num);
   return (
     <View style={styles.container}>
       <View style={styles.both}>
@@ -96,7 +79,6 @@ const Q1Next = ({ route, navigation }) => {
             zIndex: 9999,
           }}
           dropDownContainerStyle={{
-            //marginTop: -140,
             marginLeft: -70,
             marginTop: -50,
             zIndex: 9999,
@@ -114,13 +96,6 @@ const Q1Next = ({ route, navigation }) => {
       <ScrollView style={styles.textbox}>
         <Text style={styles.noteContent}>{noteContent}</Text>
       </ScrollView>
-      {/* <View style={styles.buttons}>
-        <Pressable style={styles.new} onPress={() => navigation.goBack()}>
-          <Text style={styles.redo}>{"REDO"}</Text>
-        </Pressable>
-        <Pressable style={styles.new} onPress={this._saveNote}>
-          <Text style={styles.save}>{"SAVE"}</Text>
-        </Pressable> */}
       <View style={styles.buttons}>
         <Pressable style={styles.test2} onPress={() => navigation.goBack()}>
           <Text style={styles.test}>{"Redo"}</Text>
@@ -141,7 +116,7 @@ const styles = StyleSheet.create({
   },
   both: {
     flexDirection: "row",
-    marginEnd: 80,
+    marginEnd: 70,
     padding: 5,
   },
   TitleText: {
@@ -160,7 +135,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     paddingHorizontal: 20,
     paddingVertical: 15,
-    margin: 15, //space username and password
+    margin: 15,
     alignItems: "center",
   },
   test: {
@@ -171,7 +146,7 @@ const styles = StyleSheet.create({
   },
   textbox: {
     backgroundColor: "#ededed",
-    width: 350,
+    width: windowWidth - 20,
     margin: 7,
     borderColor: "black",
     borderRadius: 10,
@@ -188,7 +163,7 @@ const styles = StyleSheet.create({
   },
   textbox: {
     backgroundColor: "#ededed",
-    width: 380,
+    width: windowWidth - 20,
     margin: 7,
     borderColor: "black",
     borderRadius: 10,

@@ -3,7 +3,6 @@ import { useNavigation } from "@react-navigation/native";
 import {
   Classes,
   Notes,
-  UnderConstructionScreen,
   Readings,
   Assignments,
   SignInScreen,
@@ -22,7 +21,6 @@ import {
   Q3Next,
   Q4Next,
   ShareNote,
-  UnderConstructionScreen2,
 } from "../utils";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
@@ -50,7 +48,7 @@ const BackButtonClasses = () => {
     </TouchableOpacity>
   );
 };
-// To rewire make changes to each component mainly for the ones set to UnderConstructionScreen2
+
 const classesStack = createStackNavigator();
 // Note: we add the BackButton to all screens exceot classes since its the main screen; we made a custom back button to get a button while getting rid of the title
 function ClassesStackNavigator() {

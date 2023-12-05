@@ -9,9 +9,12 @@ import {
   Pressable,
   TextInput,
   TouchableOpacity,
+  Dimensions,
   Alert,
 } from "react-native";
 import TextToSpeechAssn from "./TextToSpeechAssn";
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DropDownPicker from "react-native-dropdown-picker";
 
@@ -42,16 +45,11 @@ const Q4Next = ({ route, navigation }) => {
           content: noteContent,
         })
       );
-      console.log("Note saved successfully!");
-      // navigation.push("NotesOverview", {
-      //   noteName: num,
-      //   noteContent: noteContent,
-      // });
 
-      await AsyncStorage.removeItem("Assignment 2");
+      await AsyncStorage.removeItem("ASSIGNMENT 2");
       await AsyncStorage.setItem(
         "Assignment 2 Submitted",
-        JSON.stringify({ content: "Assignment 2" })
+        JSON.stringify({ content: "ASSIGNMENT 2" })
       );
       navigation.push("Assignments", { className });
     } catch (error) {
@@ -62,11 +60,8 @@ const Q4Next = ({ route, navigation }) => {
     setValue(value);
     if (value === "Q1") {
       navigation.navigate("Q3", { className });
-      //navigation.push("Q1"); //go to q1next
     }
   };
-
-  //setEditName("Note " + num);
   return (
     <View style={styles.container}>
       <View style={styles.both}>
@@ -110,13 +105,6 @@ const Q4Next = ({ route, navigation }) => {
       <ScrollView style={styles.textbox}>
         <Text style={styles.noteContent}>{noteContent}</Text>
       </ScrollView>
-      {/* <View style={styles.buttons}>
-        <Pressable style={styles.new} onPress={() => navigation.goBack()}>
-          <Text style={styles.redo}>{"REDO"}</Text>
-        </Pressable>
-        <Pressable style={styles.new} onPress={this._saveNote}>
-          <Text style={styles.save}>{"SAVE"}</Text>
-        </Pressable> */}
       <View style={styles.buttons}>
         <Pressable style={styles.test2} onPress={() => navigation.goBack()}>
           <Text style={styles.test}>{"Redo"}</Text>
@@ -126,7 +114,6 @@ const Q4Next = ({ route, navigation }) => {
         </Pressable>
       </View>
     </View>
-    //</View>
   );
 };
 
@@ -149,7 +136,7 @@ const styles = StyleSheet.create({
   },
   both: {
     flexDirection: "row",
-    marginEnd: 80,
+    marginEnd: 70,
     padding: 5,
   },
   TitleText: {
@@ -166,15 +153,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 17,
   },
-  textbox: {
-    backgroundColor: "#ededed",
-    width: 350,
-    margin: 7,
-    borderColor: "black",
-    borderRadius: 10,
-    borderWidth: 2,
-    padding: 5,
-  },
+
   noteName: {
     fontSize: 24,
     fontWeight: "bold",
@@ -185,7 +164,7 @@ const styles = StyleSheet.create({
   },
   textbox: {
     backgroundColor: "#ededed",
-    width: 380,
+    width: windowWidth - 20,
     margin: 7,
     borderColor: "black",
     borderRadius: 10,

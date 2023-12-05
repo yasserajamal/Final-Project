@@ -6,7 +6,10 @@ import {
   FlatList,
   TouchableOpacity,
   ImageBackground,
+  Dimensions,
 } from "react-native";
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 import { useNavigation } from "@react-navigation/native";
 
 const readingsList = {
@@ -103,7 +106,7 @@ const readingsList = {
     },
     {
       id: "3",
-      title: "LINEAR TRANSFORMATIONS",
+      title: "LINEAR TRANSFORMATION",
       screenName: "ReadingsOverview",
       backgroundImage: require("../../assets/Themes/reading4.jpg"),
     },
@@ -155,10 +158,11 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     backgroundColor: "white",
-    alignItems: "flex-start",
+    alignItems: "center",
+    paddingHorizontal: 10,
   },
   TitleText: {
-    fontSize: 45,
+    fontSize: windowWidth / 9.5,
     fontWeight: "bold",
     fontFamily: "Georgia",
     marginHorizontal: 15,
@@ -167,8 +171,8 @@ const styles = StyleSheet.create({
   },
   readingButton: {
     marginVertical: 10,
-    height: 120,
-    width: 430,
+    height: windowHeight / 7.1,
+    width: windowWidth - 10,
   },
   overlay: {
     backgroundColor: "#00000080",
