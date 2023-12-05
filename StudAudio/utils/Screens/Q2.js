@@ -13,7 +13,8 @@ import Voice, { SpeechResultsEvent } from "@react-native-voice/voice";
 import DropDownPicker from "react-native-dropdown-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Q2 = ({ navigation }) => {
+const Q2 = ({ route, navigation }) => {
+  const { className } = route.params;
   const [results, setResults] = useState([]);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
@@ -22,6 +23,13 @@ const Q2 = ({ navigation }) => {
     { label: "Q2", value: "Q2" },
   ]);
   const defaultOption = "Q2";
+
+  const questionList = {
+    "PHIL 180": "What is one argument for perdurantism?",
+    "ARABLANG 12": "When did the Umayyad dynasty begin?",
+    "CS 147": "What does Fitt's Law say?",
+    "MATH 51": "What are some legal and illegal opperations of vector algebra?",
+  };
 
   useEffect(() => {
     Voice.onSpeechResults = onSpeechResults;
@@ -48,7 +56,7 @@ const Q2 = ({ navigation }) => {
   const stopRecognizing = async () => {
     try {
       await Voice.stop();
-      navigation.goBack();
+      navigation.goBack({ className });
     } catch (e) {
       console.error(e);
     }
@@ -60,6 +68,7 @@ const Q2 = ({ navigation }) => {
       navigation.push("Q2Next", {
         noteContent: results,
         question: selectedReading,
+        className: className,
       });
     } catch (e) {
       console.error(e);
@@ -70,13 +79,14 @@ const Q2 = ({ navigation }) => {
   const onRateChange = async (value) => {
     setValue(value);
     if (value === "Q1") {
-      navigation.goBack();
+      navigation.goBack({ className });
       //navigation.push("Q1"); //go to q1next
     }
   };
 
-  const selectedReading =
-    "Q2: This is the second question. What is a Fitt's Law?";
+  // const selectedReading =
+  //   "Q2: This is the second question. What is a Fitt's Law?";
+  const selectedReading = questionList[className] || "";
 
   return (
     <View style={styles.container}>

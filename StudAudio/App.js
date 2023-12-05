@@ -71,16 +71,6 @@ function HamBurger({ setIsAuthenticated }) {
         options={{ headerTintColor: "black", headerTitle: "" }}
       />
       <Drawer.Screen
-        name="Account"
-        component={UnderConstructionScreen}
-        options={{ headerTintColor: "black", headerTitle: "" }}
-      />
-      <Drawer.Screen
-        name="Notifications"
-        component={UnderConstructionScreen}
-        options={{ headerTintColor: "black", headerTitle: "" }}
-      />
-      <Drawer.Screen
         name="Log Out"
         component={LogoutScreen}
         initialParams={{ setIsAuthenticated }}

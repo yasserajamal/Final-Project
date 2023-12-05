@@ -36,7 +36,6 @@ const SignInScreen = ({ route }) => {
       alert("Sign in failed: " + error.message);
       setLoading(false);
     }
-    setIsAuthenticated(true);
   };
   const ifforgotPressed = () => {
     navigation.navigate("Forgot Password");
@@ -69,9 +68,9 @@ const SignInScreen = ({ route }) => {
         <>
           <CustomButton text="Sign In" onPress={ifSignInPressed} />
           <Pressable onPress={ifforgotPressed} style={styles.pressableText}>
-            <Text style={styles.forgotText}>Forgot password?</Text>
+            <Text style={styles.forgotText}>{"\n"}Forgot password?</Text>
           </Pressable>
-          <Text style={styles.text}>{"\n"}Don't have an account yet?</Text>
+          {/* <Text style={styles.text}>{"\n"}Don't have an account yet?</Text> */}
           <CustomButton
             text="Sign up"
             onPress={ifSignUpPressed}
@@ -109,8 +108,9 @@ const styles = StyleSheet.create({
   },
   forgotText: {
     paddingHorizontal: 2,
-    fontSize: 15,
+    fontSize: 17,
     fontWeight: "light",
+    fontWeight: "bold",
     fontFamily: "Georgia",
   },
   pressableText: {

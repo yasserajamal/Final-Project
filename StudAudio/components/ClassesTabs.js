@@ -4,7 +4,6 @@ import {
   Classes,
   Notes,
   UnderConstructionScreen,
-  Grades,
   Readings,
   Assignments,
   SignInScreen,
@@ -138,11 +137,6 @@ function ClassesStackNavigator() {
       <classesStack.Screen
         name="ShareScreen"
         component={ShareScreen}
-        options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
-      />
-      <classesStack.Screen
-        name="Grades"
-        component={Grades}
         options={{ headerTitle: () => null, headerLeft: () => <BackButton /> }}
       />
       <classesStack.Screen

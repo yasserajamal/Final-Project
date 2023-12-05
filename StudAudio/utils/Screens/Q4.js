@@ -13,7 +13,8 @@ import Voice, { SpeechResultsEvent } from "@react-native-voice/voice";
 import DropDownPicker from "react-native-dropdown-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Q4 = ({ navigation }) => {
+const Q4 = ({ route, navigation }) => {
+  const { className } = route.params;
   const [results, setResults] = useState([]);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
@@ -22,6 +23,15 @@ const Q4 = ({ navigation }) => {
     { label: "Q2", value: "Q2" },
   ]);
   const defaultOption = "Q2";
+
+  const questionList = {
+    "PHIL 180": "What are the two views about the nature of reality?",
+    "ARABLANG 12":
+      "What was the most noteworthy building by the Abbasids in the 750s?",
+    "CS 147": "What are the benefits of low-fidelity testing?",
+    "MATH 51":
+      "True or False: the product of matrices depend on the order of multiplication?",
+  };
 
   useEffect(() => {
     Voice.onSpeechResults = onSpeechResults;
@@ -48,7 +58,7 @@ const Q4 = ({ navigation }) => {
   const stopRecognizing = async () => {
     try {
       await Voice.stop();
-      navigation.goBack();
+      navigation.goBack({ className });
     } catch (e) {
       console.error(e);
     }
@@ -60,6 +70,7 @@ const Q4 = ({ navigation }) => {
       navigation.push("Q4Next", {
         noteContent: results,
         question: selectedReading,
+        className: className,
       });
     } catch (e) {
       console.error(e);
@@ -70,13 +81,14 @@ const Q4 = ({ navigation }) => {
   const onRateChange = async (value) => {
     setValue(value);
     if (value === "Q1") {
-      navigation.goBack();
+      navigation.goBack({ className });
       //navigation.push("Q1"); //go to q1next
     }
   };
 
-  const selectedReading =
-    "Q2: This is the second question. Referring to the eye, what are cones and rods?";
+  // const selectedReading =
+  //   "Q2: This is the second question. What is a Fitt's Law?";
+  const selectedReading = questionList[className] || "";
 
   return (
     <View style={styles.container}>
