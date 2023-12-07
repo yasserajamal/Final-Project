@@ -26,6 +26,25 @@ const Q1 = ({ route, navigation }) => {
     { label: "Q1", value: "Q1" },
     { label: "Q2", value: "Q2" },
   ]);
+  const [image, setImage] = useState(false);
+  const changeImage = () => setImage((prev) => !prev);
+  let link = image
+    ? require("../../assets/Themes/microphone.png")
+    : require("../../assets/Themes/microphone2.png");
+
+  const [record, setRecord] = useState(false);
+  const changeRecord = () => setRecord((prev) => !prev);
+
+  const recording = () => {
+    changeRecord();
+    changeImage();
+    if (!record) {
+      startRecognizing();
+    } else {
+      stopRecording();
+    }
+  };
+
   const defaultOption = "Q1";
 
   const questionList = {
@@ -47,6 +66,8 @@ const Q1 = ({ route, navigation }) => {
   useFocusEffect(
     React.useCallback(() => {
       setValue("Q1");
+      setImage(false);
+      setRecord(false);
     }, [])
   );
 
@@ -56,9 +77,17 @@ const Q1 = ({ route, navigation }) => {
   };
 
   const startRecognizing = async () => {
-    setResults([]);
+    //setResults([]);
     try {
       await Voice.start("en-US");
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const stopRecording = async () => {
+    try {
+      await Voice.stop();
     } catch (e) {
       console.error(e);
     }
@@ -88,16 +117,12 @@ const Q1 = ({ route, navigation }) => {
   };
 
   const onRateChange = async (value) => {
-    console.log(value);
     setValue(value);
     if (value === "Q2") {
       navigation.push("Q2", { className });
     }
   };
 
-  console.log(questionList);
-  console.log(className);
-  console.log(questionList[className]);
   const selectedReading = questionList[className] || "";
 
   return (
@@ -146,11 +171,8 @@ const Q1 = ({ route, navigation }) => {
           </Text>
         ))}
       </ScrollView>
-      <TouchableHighlight onPress={startRecognizing}>
-        <Image
-          style={styles.button}
-          source={require("../../assets/Themes/microphone.png")}
-        />
+      <TouchableHighlight onPress={recording}>
+        <Image style={styles.button} source={link} />
       </TouchableHighlight>
       <View style={styles.buttons}>
         <Pressable style={styles.test2} onPress={stopRecognizing}>

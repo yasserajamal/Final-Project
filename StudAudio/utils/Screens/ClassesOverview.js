@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   classButton: {
-    marginVertical: 10,
+    marginVertical: 5,
     height: windowHeight / 7.1,
     width: windowWidth - 10,
   },

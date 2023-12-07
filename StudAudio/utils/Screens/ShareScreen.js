@@ -34,9 +34,12 @@ const ShareScreen = ({ route, navigation }) => {
           placeholder="Enter contact information"
         />
 
-        <TouchableOpacity onPress={createAlert} style={{ marginLeft: 10 }}>
-          <Text style={styles.textnew}>Submit</Text>
-        </TouchableOpacity>
+        {/* <TouchableOpacity onPress={createAlert} style={{ marginLeft: 10 }}> */}
+        <Pressable style={styles.test2} onPress={createAlert}>
+          <Text style={styles.test}>{"Submit"}</Text>
+        </Pressable>
+        {/* <Text style={styles.textnew}>Submit</Text> */}
+        {/* </TouchableOpacity> */}
       </View>
     </View>
   );
@@ -48,6 +51,12 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "white",
     alignItems: "flex-start",
+  },
+  test: {
+    color: "white",
+    fontFamily: "Georgia",
+    fontWeight: "bold",
+    fontSize: 17,
   },
   center: {
     flex: 1,
@@ -64,27 +73,22 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     position: "relative",
   },
+  test2: {
+    backgroundColor: "black",
+    width: "30%",
+    borderColor: "#e8e8e8bh",
+    borderWidth: 1,
+    borderRadius: 15,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    margin: 15,
+    alignItems: "center",
+  },
   textnew: {
     fontSize: 25,
     fontFamily: "Arial",
     marginHorizontal: 15,
     marginVertical: 10,
-  },
-  classButton: {
-    marginVertical: 10,
-    height: 120,
-    width: 430,
-  },
-  overlay: {
-    backgroundColor: "#00000080",
-    flex: 1,
-    justifyContent: "center",
-  },
-  classButtonText: {
-    fontSize: 32,
-    color: "white",
-    textAlign: "center",
-    fontFamily: "Arial",
   },
   input: {
     height: 50,

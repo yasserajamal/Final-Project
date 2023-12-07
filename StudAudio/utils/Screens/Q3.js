@@ -26,6 +26,31 @@ const Q3 = ({ route, navigation }) => {
     { label: "Q2", value: "Q2" },
   ]);
   const defaultOption = "Q1";
+  const [image, setImage] = useState(false);
+  const changeImage = () => setImage((prev) => !prev);
+  let link = image
+    ? require("../../assets/Themes/microphone.png")
+    : require("../../assets/Themes/microphone2.png");
+
+  const [record, setRecord] = useState(false);
+  const changeRecord = () => setRecord((prev) => !prev);
+
+  const recording = () => {
+    changeRecord();
+    changeImage();
+    if (!record) {
+      startRecognizing();
+    } else {
+      stopRecording();
+    }
+  };
+  const stopRecording = async () => {
+    try {
+      await Voice.stop();
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const questionList = {
     "PHIL 180": "What are anti-Realist critiques of realism?",
@@ -47,6 +72,8 @@ const Q3 = ({ route, navigation }) => {
   useFocusEffect(
     React.useCallback(() => {
       setValue("Q1");
+      setImage(false);
+      setRecord(false);
     }, [])
   );
 
@@ -142,11 +169,8 @@ const Q3 = ({ route, navigation }) => {
           </Text>
         ))}
       </ScrollView>
-      <TouchableHighlight onPress={startRecognizing}>
-        <Image
-          style={styles.button}
-          source={require("../../assets/Themes/microphone.png")}
-        />
+      <TouchableHighlight onPress={recording}>
+        <Image style={styles.button} source={link} />
       </TouchableHighlight>
       <View style={styles.buttons}>
         <Pressable style={styles.test2} onPress={stopRecognizing}>

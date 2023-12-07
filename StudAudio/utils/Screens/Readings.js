@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   readingButton: {
-    marginVertical: 10,
+    marginVertical: 5,
     height: windowHeight / 7.1,
     width: windowWidth - 10,
   },

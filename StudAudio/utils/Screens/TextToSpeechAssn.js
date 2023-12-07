@@ -81,7 +81,7 @@ const TextToSpeechAssn = ({ passedData }) => {
 
   return (
     <View style={styles.container}>
-      <Button color="black" style="button" title={passedData} onPress={speak} />
+      <Text style={styles.text}>{passedData}</Text>
       <View style={styles.sliders}>
         <View style={styles.group}></View>
         <View style={styles.group}></View>
