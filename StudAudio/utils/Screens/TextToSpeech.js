@@ -79,7 +79,7 @@ const TextToSpeech = ({ passedData }) => {
 
   return (
     <View style={styles.container}>
-      <Button color="black" style="button" title="Listen" onPress={speak} />
+      <Text style={styles.text}> Listen </Text>
       <View style={styles.sliders}>
         <View style={styles.group}></View>
         <View style={styles.group}></View>

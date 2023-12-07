@@ -45,6 +45,7 @@ const setDefaultNotes = async () => {
     );
     await AsyncStorage.removeItem("Assignment 1 Submitted");
     await AsyncStorage.removeItem("Assignment 2 Submitted");
+    // await AsyncStorage.removeItem("noteCounter");
   } catch (error) {
     console.error("Error editing note name:", error);
   }
@@ -101,7 +102,7 @@ function AppStacks({ setIsAuthenticated }) {
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  //LogBox.ignoreAllLogs();
+  LogBox.ignoreAllLogs();
   setDefaultNotes();
   return (
     <NavigationContainer>

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,37 +11,52 @@ import {
 import Voice, { SpeechResultsEvent } from "@react-native-voice/voice";
 import { withNavigation } from "@react-navigation/compat";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFocusEffect } from "@react-navigation/native";
 
-type Props = {};
-type State = {
-  results: string[],
-};
+const Notes = ({ route, navigation }) => {
+  const [results, setResults] = useState([]);
 
-class Notes extends Component<Props, State> {
-  state = {
-    results: [],
+  const [image, setImage] = useState(false);
+  const changeImage = () => setImage((prev) => !prev);
+  let link = image
+    ? require("../../assets/Themes/microphone.png")
+    : require("../../assets/Themes/microphone2.png");
+
+  const [record, setRecord] = useState(false);
+  const changeRecord = () => setRecord((prev) => !prev);
+
+  const recording = () => {
+    changeRecord();
+    changeImage();
+    if (!record) {
+      startRecognizing();
+    } else {
+      stopRecording();
+    }
   };
 
-  constructor(props: Props) {
-    super(props);
-    Voice.onSpeechResults = this.onSpeechResults;
-  }
+  useFocusEffect(
+    React.useCallback(() => {
+      setImage(false);
+      setRecord(false);
+    }, [])
+  );
 
-  componentWillUnmount() {
-    Voice.destroy().then(Voice.removeAllListeners);
-  }
+  useEffect(() => {
+    Voice.onSpeechResults = onSpeechResults;
 
-  onSpeechResults = (e: SpeechResultsEvent) => {
-    this.setState({
-      results: e.value,
-    });
+    return () => {
+      Voice.destroy().then(Voice.removeAllListeners);
+    };
+  }, []);
+
+  const onSpeechResults = (e: SpeechResultsEvent) => {
+    console.log("onSpeechResults: ", e);
+    setResults(e.value);
   };
 
-  _startRecognizing = async () => {
-    this.setState({
-      results: [],
-    });
-
+  const startRecognizing = async () => {
+    //setResults([]);
     try {
       await Voice.start("en-US");
     } catch (e) {
@@ -49,84 +64,62 @@ class Notes extends Component<Props, State> {
     }
   };
 
-  _stopRecognizing = async () => {
+  const stopRecording = async () => {
     try {
       await Voice.stop();
-      this.props.navigation.goBack();
     } catch (e) {
       console.error(e);
     }
   };
 
-  _destroyRecognizer = async () => {
+  const stopRecognizing = async () => {
+    try {
+      await Voice.stop();
+      navigation.goBack();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const destroyRecognizer = async (selectedReading) => {
     try {
       await Voice.destroy();
-      this.props.navigation.push("NotesNext", {
-        noteContent: this.state.results,
+      navigation.push("NotesNext", {
+        noteContent: results,
       });
     } catch (e) {
       console.error(e);
     }
-    this.setState({
-      results: [],
-    });
+    setResults([]);
   };
 
-  _saveNote = async (noteNumber, noteText) => {
-    try {
-      const storedCount = await AsyncStorage.getItem("noteCounter");
-      const curCount = storedCount ? parseInt(storedCount) : 1;
-      await AsyncStorage.setItem("noteCounter", `${curCount + 1}`);
-
-      await AsyncStorage.setItem(
-        `Note ${curCount}`,
-        JSON.stringify({
-          noteNum: noteNumber,
-          content: noteText,
-        })
-      );
-      this.setState((prevState) => ({
-        noteCounter: prevState.noteCounter + 1,
-      }));
-    } catch (error) {
-      console.error("Error saving note:", error);
-    }
-  };
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>New Voice Recording</Text>
-        <Text style={styles.instructions}>
-          Press the microphone and start speaking.
-        </Text>
-        <ScrollView style={styles.textbox}>
-          {this.state.results.map((result, index) => {
-            return (
-              <Text key={`result-${index}`} style={styles.stat}>
-                {result}
-              </Text>
-            );
-          })}
-        </ScrollView>
-        <TouchableHighlight onPress={this._startRecognizing}>
-          <Image
-            style={styles.button}
-            source={require("../../assets/Themes/microphone.png")}
-          />
-        </TouchableHighlight>
-        <View style={styles.buttons}>
-          <Pressable style={styles.test2} onPress={this._stopRecognizing}>
-            <Text style={styles.test}>{"Cancel"}</Text>
-          </Pressable>
-          <Pressable style={styles.test2} onPress={this._destroyRecognizer}>
-            <Text style={styles.test}>{"Finish"}</Text>
-          </Pressable>
-        </View>
+  return (
+    <View style={styles.container}>
+      <Text style={styles.welcome}>New Voice Recording</Text>
+      <Text style={styles.instructions}>
+        Press the microphone and start speaking.
+      </Text>
+      <ScrollView style={styles.textbox}>
+        {results.map((result, index) => (
+          <Text key={`result-${index}`} style={styles.stat}>
+            {result}
+          </Text>
+        ))}
+      </ScrollView>
+      <TouchableHighlight onPress={recording}>
+        <Image style={styles.button} source={link} />
+      </TouchableHighlight>
+      <View style={styles.buttons}>
+        <Pressable style={styles.test2} onPress={stopRecognizing}>
+          <Text style={styles.test}>{"Cancel"}</Text>
+        </Pressable>
+        <Pressable style={styles.test2} onPress={destroyRecognizer}>
+          <Text style={styles.test}>{"Finish"}</Text>
+        </Pressable>
       </View>
-    );
-  }
-}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   textbox: {

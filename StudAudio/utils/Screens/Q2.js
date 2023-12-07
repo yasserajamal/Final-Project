@@ -15,6 +15,7 @@ import TextToSpeechAssn from "./TextToSpeechAssn";
 import Voice, { SpeechResultsEvent } from "@react-native-voice/voice";
 import DropDownPicker from "react-native-dropdown-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFocusEffect } from "@react-navigation/native";
 
 const Q2 = ({ route, navigation }) => {
   const { className } = route.params;
@@ -25,6 +26,39 @@ const Q2 = ({ route, navigation }) => {
     { label: "Q1", value: "Q1" },
     { label: "Q2", value: "Q2" },
   ]);
+  const [image, setImage] = useState(false);
+  const changeImage = () => setImage((prev) => !prev);
+  let link = image
+    ? require("../../assets/Themes/microphone.png")
+    : require("../../assets/Themes/microphone2.png");
+
+  const [record, setRecord] = useState(false);
+  const changeRecord = () => setRecord((prev) => !prev);
+
+  const recording = () => {
+    changeRecord();
+    changeImage();
+    if (!record) {
+      startRecognizing();
+    } else {
+      stopRecording();
+    }
+  };
+  const stopRecording = async () => {
+    try {
+      await Voice.stop();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      setImage(false);
+      setRecord(false);
+    }, [])
+  );
+
   const defaultOption = "Q2";
 
   const questionList = {
@@ -132,11 +166,8 @@ const Q2 = ({ route, navigation }) => {
           </Text>
         ))}
       </ScrollView>
-      <TouchableHighlight onPress={startRecognizing}>
-        <Image
-          style={styles.button}
-          source={require("../../assets/Themes/microphone.png")}
-        />
+      <TouchableHighlight onPress={recording}>
+        <Image style={styles.button} source={link} />
       </TouchableHighlight>
       <View style={styles.buttons}>
         <Pressable style={styles.test2} onPress={stopRecognizing}>

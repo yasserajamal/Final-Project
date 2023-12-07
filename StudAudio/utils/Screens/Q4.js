@@ -12,6 +12,7 @@ import {
 import TextToSpeechAssn from "./TextToSpeechAssn";
 import Voice, { SpeechResultsEvent } from "@react-native-voice/voice";
 import DropDownPicker from "react-native-dropdown-picker";
+import { useFocusEffect } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -25,6 +26,39 @@ const Q4 = ({ route, navigation }) => {
     { label: "Q2", value: "Q2" },
   ]);
   const defaultOption = "Q2";
+  const [image, setImage] = useState(false);
+  const changeImage = () => setImage((prev) => !prev);
+  let link = image
+    ? require("../../assets/Themes/microphone.png")
+    : require("../../assets/Themes/microphone2.png");
+
+  const [record, setRecord] = useState(false);
+  const changeRecord = () => setRecord((prev) => !prev);
+
+  const recording = () => {
+    changeRecord();
+    changeImage();
+    if (!record) {
+      startRecognizing();
+    } else {
+      stopRecording();
+    }
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      setImage(false);
+      setRecord(false);
+    }, [])
+  );
+
+  const stopRecording = async () => {
+    try {
+      await Voice.stop();
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const questionList = {
     "PHIL 180": "What are the two views about the nature of reality?",
@@ -133,11 +167,8 @@ const Q4 = ({ route, navigation }) => {
           </Text>
         ))}
       </ScrollView>
-      <TouchableHighlight onPress={startRecognizing}>
-        <Image
-          style={styles.button}
-          source={require("../../assets/Themes/microphone.png")}
-        />
+      <TouchableHighlight onPress={recording}>
+        <Image style={styles.button} source={link} />
       </TouchableHighlight>
       <View style={styles.buttons}>
         <Pressable style={styles.test2} onPress={stopRecognizing}>

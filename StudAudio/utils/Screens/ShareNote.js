@@ -8,9 +8,10 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+const windowWidth = Dimensions.get("window").width;
 const readingsList = [
   {
     id: "1",
@@ -45,7 +46,7 @@ const ShareNote = ({ route, navigation }) => {
     <TouchableOpacity
       onPress={() => navigation.navigate("ShareScreen", { share: item.title })}
     >
-      <View style={styles.textbox}>
+      <View style={styles.overlay}>
         <Text style={styles.readingButtonText}>{item.title}</Text>
         <Image style={styles.button} source={item.image} />
       </View>
@@ -72,6 +73,17 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "white",
     alignItems: "center",
+  },
+  overlay: {
+    justifyContent: "space-between",
+    flexDirection: "row",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    padding: 10,
+    width: windowWidth - 20,
+    marginBottom: 16,
+    alignContent: "center",
   },
   contain: {
     flex: 1,
@@ -100,16 +112,11 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
   readingButton: {
-    marginVertical: 10,
+    marginVertical: 5,
     height: 120,
     width: 430,
   },
-  overlay: {
-    backgroundColor: "#00000080",
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
-  },
+
   readingButtonText: {
     fontSize: 22,
     color: "black",
