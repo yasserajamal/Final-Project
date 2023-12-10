@@ -1,30 +1,17 @@
 StudAudio
-Description: Allowing Users to School On-The-Go with Audio. 
-Style Guide:
-For headings, we used Georgia and for actual screen contents we used: Arial. For titles, the font is 50, for other text 15-20
+Allowing Users to School On-The-Go with Audio.
 
-Features:
-1. Full Authentication using firebase: StuAudio allows users to sign up for an account, sign in/out and reset password using their email.
-2.  StuAudio has four bottom tabs which the user can use to quickly 
+StudAudio strives to alleviate stress for older adult students by providing them the flexibility to engage in readings and assignments using our app, even during commutes or while attending to family responsibilities. With this app, adult learners can conveniently accomplish tasks during their commutes, such as listening to readings in the form of podcasts, submitting assignments through audio, and taking and sharing notes with others.
 
-Tasks 
-1. Complete Sign in: In Progress YJ
-    a. this includes username/password, forgot password, 
-    b. canvas page
-    c. sign up page
-    d. Apple page (stretch goal)
-2. Home Screen: List of all classes, top and bottom navigation bar (YJ)
-3. Class Screen: this includes the profile pic,  bottom buttons (help, quick record, classes)and options of Assignments, Notes, Recordings, and Readings
-4. Simple Task: Submitting Assignments
-    1. 
-
-5. Moderate Task: Convert Reading
-    a. List of Notes screen + Button to create a new note
-    b. rename feature for notes
-6. Complex Task: Create and share a note
-   1. Share screen (similar to sign in includes messages, gmail slack etc)
-   2. sharing messages, can make a screen of what it looks like. 
-   3. add a STOP screen. 
+Key Pages:
+1. Sign in: Users can log in with their username/password, and includes options to sign up or reset forgotten password
+2. Home Screen: Contains the list of all classes a user is currently enrolled in
+3. Class Screen: This includes the options of reaching the assignments, notes, and reading tasks
+   - Simple Task: Submitting assignments (user can listen or read the question, and submit an answer through speech)
+   - Moderate Task: Read or listen to readings
+   - Complex Task: Create and share a note (user can create a note, edit the note content and name, and share it with others through messages, gmail, slack, etc)
+5. Connect Screen: Classmates taking the same courses are recommended, and users have the option to swipe right and send a connection request
+6. FAQ Screen: List of frequently asked questions and answers
 
 Installation Guide: 
 
@@ -55,9 +42,13 @@ Invariant Violation - Native Module Doesn't Exist:
 If you encounter an error about a missing native module, ensure that all dependencies are properly installed. Run npm install again in the project root.
 Build Issues:
 If the build fails, try cleaning the project in Xcode (Product -> Clean Build Folder) and rebuild it.
+
 Simulator Doesn't Launch:
 Make sure Xcode is correctly installed with all necessary components.
 If the simulator doesn't start automatically, open it manually from Xcode (Xcode -> Open Developer Tool -> Simulator).
+
+Audio not working:
+Try refreshing the app, or testing on a simulator with iOS 15.x or less
 
 Ejecting from Expo:
 If needed, you can eject from Expo to a bare workflow for more control over native code. Use expo eject and follow the prompts.
@@ -70,6 +61,23 @@ Additional Notes
 Always ensure that your local environment matches the app's required versions for Node.js, npm, Expo CLI, and Xcode.
 For any specific errors or issues, refer to the error logs in the terminal or Xcode for more details.
 
+Wizard of Oz Items:
+1. Connection Profiles:
+   - Profiles will be suggested to the user based on preferences for proximity and if taking the same courses.
+2. Course List:
+   - Ideally, users will be able to add the courses they are enrolled in. Our app simulates the experience of being enrolled in courses.
+3. Assignments:
+   - Generally, assignments will be provided to the user based on their course enrollment.
+
+Hard-Coded Aspects:
+1. Names of the courses
+2. Connection profiles recommend
+3. User Profile
+4. List of Readings
+5. List of Assignments 
+
+Style Guide: 
+- For headings, we used Georgia and for actual screen contents we used: Arial. For titles, the font is 50, for other text 15-20
 
 Resources
 
@@ -77,7 +85,6 @@ Resources
 2. Custom Bottom Tab Navigator in React Native (https://www.youtube.com/watch?v=gPaBicMaib4)
 3. Authentication using FireBase (https://www.youtube.com/watch?v=ONAVmsGW6-M)
 4. Options for building React Native collapsible accordions(https://blog.logrocket.com/building-react-native-collapsible-accordions/)
-
 5. REACT NAVIGATION GUIDE (https://reactnavigation.org/docs)
 6. How to Build React Native Swipe Cards Inspired by Tinder (https://instamobile.io/react-native-controls/react-native-swipe-cards-tinder/)
 7. react-native-deck-swiper (https://www.npmjs.com/package/react-native-deck-swiper)
