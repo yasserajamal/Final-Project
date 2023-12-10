@@ -76,6 +76,7 @@ const NotesNext = ({ route, navigation }) => {
         <TextInput
           style={styles.noteContent}
           onChangeText={setEditContent}
+          multiline={true}
           value={editContent.toString()}
         />
       </ScrollView>

@@ -59,6 +59,7 @@ const NotesText = ({ route }) => {
         <TextInput
           style={styles.noteContent}
           value={editContent.toString()}
+          multiline={true}
           onChangeText={(text) => setEditContent(text)}
           onBlur={editNoteName}
         />
